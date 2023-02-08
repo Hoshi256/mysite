@@ -29,6 +29,8 @@
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
 
+
+
 {% if app.user %}
 
 <li>
@@ -38,6 +40,14 @@ Hello, {{ app.user.FirstName}}
 <li>
 <a href="{{ path('app_logout') }}">Logout</a>
 </li>
+
+{% else %}
+
+<li>
+<a href="{{ path('app_login') }}">Login</a>
+
+</li>
+
 {% endif %}
 
 
