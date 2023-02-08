@@ -5,38 +5,58 @@
 
 {% block body %}
 <style>
+
+.title {
+  color: green;
+}
+    
+      body {
+        background: #CEF6F5;
+      }
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-        <h2>I say {{ test }}! </h2>
+<h1 class="title">Welcome to my site</h1>
 
 
 
-       {% for p in products %}
+<div class="photo">
+  <img src="./images/bali1.jpg" alt="">
+  {# <img src="./images/bali2.jpeg" alt=""> #}
+
+</div>
+
+
+
+    {# <h1>Hello {{ controller_name }}! </h1> #}
+        {# <h2>I say {{ test }}! </h2> #}
+
+
+
+       {# {% for p in products %}
              <h2>{{p}}</h2>
-       {% endfor %}
+       {% endfor %} #}
 
         
-        {% for c in client %}
+        {# {% for c in client %} #}
        
 
-        <p>{{c}}</p>
-        {% endfor %}
+        {# <p>{{c}}</p> #}
+        {# {% endfor %} #}
 
 
-        {% block name %}
+        {# {% block name %} #}
 
-        <p> nom : {{ client.nom }}</p>
-        <p> prenom : {{ client.prenom }}</p>
+        {# <p> nom : {{ client.nom }}</p> #}
+        {# <p> prenom : {{ client.prenom }}</p> #}
 
-        {% endblock %}
+        {# {% endblock %} #}
 
       
-      {% block nom %}
-  <table>
+      {# {% block nom %} #}
+  {# <table>
     <thead>
       <tr>
         <th>Prénom</th>
@@ -52,7 +72,7 @@
       {% endfor %}
     </tbody>
   </table>
-{% endblock %}
+{% endblock %} #}
 
 
 
@@ -62,5 +82,9 @@
         <li>Your controller at <code><a href="{{ 'C:/laragon/www/mysite/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
         <li>Your template at <code><a href="{{ 'C:/laragon/www/mysite/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
     </ul> #}
-</div>
+{# </div> #}
+
+
 {% endblock %}
+
+

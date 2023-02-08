@@ -1,0 +1,14 @@
+<nav>
+    <ul>
+        <li><a href="{{ path('home') }}">Home</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('admin') }}">Admin</a></li>
+        {% endif %}
+        {% if is_granted('ROLE_USER') %}
+            <li><a href="{{ path('user') }}">User</a></li>
+            <li><a href="{{ path('app_logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ path('app_login') }}">Login</a></li>
+        {% endif %}
+    </ul>
+</nav>

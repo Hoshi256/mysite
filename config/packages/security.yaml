@@ -33,6 +33,15 @@ security:
     access_control:
         - { path: ^/product/add, roles: ROLE_ADMIN }
         - { path: ^/category/add, roles: ROLE_ADMIN }
+        #  - { path: ^/product/edit/\d+, roles: ROLE_ADMIN }
+        #  - { path: ^/product/edit/2, roles: ROLE_ADMIN }
+        
+            # - { path: ^/product/edit[0-9]+$, roles: ROLE_ADMIN }
+            # - { path: ^/product/edit/\d{1,}, roles: ROLE_ADMIN }
+
+
+
+
 
         # - { path: ^/profile, roles: ROLE_USER }
 
