@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Continents{% endblock %}
+
+{% block body %}
+    <h1>Create new Continents</h1>
+
+    {{ include('continents_crud/_form.html.twig') }}
+
+    <a href="{{ path('app_continents_crud_index') }}">back to list</a>
+{% endblock %}

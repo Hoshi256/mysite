@@ -14,7 +14,7 @@ class Category1Type extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('date')
+             ->add('date',DateType::class,array('data'=>new \DateTime()))
             ->add('image')
         ;
     }

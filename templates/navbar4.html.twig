@@ -17,25 +17,23 @@
         <a class="nav-link" href="{{path('app_product_controller_crud_index')}}">Product list</a>
       </li>
 
-
-
-
-
-      {# <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li> #}
+      
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" href="{{path('app_product_controller_crud_index')}}">Continents</a>
       </li>
 
+   <li class="nav-item">
+        <a class="nav-link" href="{{path('app_pays_index')}}">Pays</a>
+      </li>
+
+     <li class="nav-item">
+
+     
+   <li class="nav-item">
+        <a class="nav-link" href="{{path('app_vacance_index')}}">Vacance</a>
+      </li>
+
+     <li class="nav-item">
 
 
 {% if app.user %}
@@ -58,6 +56,27 @@ Hello, {{ app.user.FirstName}}
 </li>
 
 {% endif %}
+
+      </li>
+
+      {# <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li> #}
+      {# <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li> #}
+
+
+
+
 
 
 
@@ -83,5 +102,9 @@ Hello, {{ app.user.FirstName}}
 .nav-link {
   color: red;
   font-size: 20px;
+}
+
+nav ul li {
+  margin: 0 20px;
 }
 </style>

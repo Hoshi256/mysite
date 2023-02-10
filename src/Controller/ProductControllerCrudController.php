@@ -21,6 +21,8 @@ class ProductControllerCrudController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/new', name: 'app_product_controller_crud_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProductRepository $productRepository): Response
     {
@@ -29,6 +31,8 @@ class ProductControllerCrudController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
             $productRepository->save($product, true);
 
             return $this->redirectToRoute('app_product_controller_crud_index', [], Response::HTTP_SEE_OTHER);

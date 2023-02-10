@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vacance index{% endblock %}
+
+{% block body %}
+    <h1>Vacance index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Prix</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vacance in vacances %}
+            <tr>
+                <td>{{ vacance.id }}</td>
+                <td>{{ vacance.name }}</td>
+                <td>{{ vacance.prix }}</td>
+                <td>{{ vacance.description }}</td>
+                <td>
+                    <a href="{{ path('app_vacance_show', {'id': vacance.id}) }}">show</a>
+                    <a href="{{ path('app_vacance_edit', {'id': vacance.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_vacance_new') }}">Create new</a>
+{% endblock %}

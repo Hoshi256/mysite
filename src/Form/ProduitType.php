@@ -2,31 +2,34 @@
 
 namespace App\Form;
 
-use App\Entity\Product;
+use App\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class Product1Type extends AbstractType
+class ProduitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name')
-            ->add('description')
-            ->add('price')
-            ->add('category')
-            ->add('image')
-           
+            ->add('content')
+            //on ajute le champ image
+            //il n'est pas lié a la base de donnees (mapped a false)
+            ->add('image', FileType::class, [
+                'label' => false,
+                'multiple' => true,
+                'mapped' => false,
+                'required' =>  false,
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Product::class,
+            'data_class' => Produit::class,
         ]);
     }
 }

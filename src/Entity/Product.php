@@ -93,4 +93,7 @@ class Product
 
         return $this;
     }
+
+    // private
+    
 }
