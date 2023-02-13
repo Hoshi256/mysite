@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Oras{% endblock %}
+
+{% block body %}
+    <h1>Edit Oras</h1>
+
+    {{ include('oras/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_oras_index') }}">back to list</a>
+
+    {{ include('oras/_delete_form.html.twig') }}
+{% endblock %}

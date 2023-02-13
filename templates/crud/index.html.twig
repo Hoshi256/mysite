@@ -23,7 +23,7 @@
                 <td>{{ category.name }}</td>
                 <td>{{ category.description }}</td>
                 <td>{{ category.date ? category.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ category.image }}</td>
+                <td><img src='../uploads/{{ category.image }}'></td>
                 <td>
                     <a href="{{ path('app_crud_show', {'id': category.id}) }}"><button>Show</button></a>
                     <a href="{{ path('app_crud_edit', {'id': category.id}) }}"><button>Edit</button></a>

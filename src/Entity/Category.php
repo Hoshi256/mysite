@@ -29,6 +29,7 @@ class Category
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Product::class)]
+    
     private Collection $products;
 
     public function __construct()
@@ -77,10 +78,14 @@ class Category
         return $this;
     }
 
+        private $Image;
+
+
     public function getImage(): ?string
     {
         return $this->image;
     }
+
 
     public function setImage(string $image): self
     {
@@ -117,5 +122,7 @@ class Category
         }
 
         return $this;
+
+        
     }
 }
