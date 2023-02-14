@@ -4,13 +4,15 @@ namespace App\Form;
 
 use App\Entity\Product;
 use App\Entity\Category;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class Product1Type extends AbstractType
 {
@@ -20,10 +22,28 @@ class Product1Type extends AbstractType
             ->add('name')
             ->add('description')
             ->add('price')
-          
-            ->add('image')
+           
+            ->add('image', FileType::class, [
+                 'label' => 'image',
+                 'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize'=> '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                            'image/jpg'
+                        ],
+                     'mimeTypesMessage' => 'Please upload a valid image',
 
-            ->add(
+                    ])
+                ]
+
+
+            ])
+             ->add(
                 'Category',
                 EntityType::class,
                 [
@@ -33,7 +53,8 @@ class Product1Type extends AbstractType
                     'label' => 'Catégorie',
                 ]
             )
-                ->add('submit',SubmitType::class)
+
+            
            
         ;
     }

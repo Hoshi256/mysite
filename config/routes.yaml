@@ -6,3 +6,6 @@ controllers:
 kernel:
     resource: App\Kernel
     type: attribute
+register:
+    path: /register
+    controller: App\Controller\RegistrationController::register

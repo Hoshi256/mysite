@@ -3,31 +3,61 @@
 {% block title %}Category index{% endblock %}
 
 {% block body %}
+
+{% if app.user and is_granted('ROLE_USER') %}
+
+
     <h3 class="title">La liste de categories</h3>
 
     <table class="table">
         <thead>
             <tr>
+
+                    {% if app.user and is_granted('ROLE_ADMIN') %}
+
                 <th>Id</th>
+                        {% endif %}
+
                 <th>Name</th>
                 <th>Description</th>
                 <th>Date</th>
                 <th>Image</th>
-                <th>actions</th>
+        {% if app.user and is_granted('ROLE_ADMIN') %}
+
+
+                    <th>actions</th>
+
+        {% endif %}
+
             </tr>
         </thead>
         <tbody>
         {% for category in categories %}
             <tr>
+                                {% if app.user and is_granted('ROLE_ADMIN') %}
+
                 <td>{{ category.id }}</td>
+                                   {% endif %}
+
                 <td>{{ category.name }}</td>
                 <td>{{ category.description }}</td>
                 <td>{{ category.date ? category.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td><img src='../uploads/{{ category.image }}'></td>
-                <td>
-                    <a href="{{ path('app_crud_show', {'id': category.id}) }}"><button>Show</button></a>
-                    <a href="{{ path('app_crud_edit', {'id': category.id}) }}"><button>Edit</button></a>
-                </td>
+                <td><img src='{{ app.request.getBaseURL() }}/ulpoads/{{ category.image }}'></td>
+              
+             {% if app.user and is_granted('ROLE_ADMIN') %}
+
+               <td>
+
+
+                    <a href="{{ path('app_crud_show', {'id': category.id}) }}"><button class="button-show">Show</button></a>
+                    <a href="{{ path('app_crud_edit', {'id': category.id}) }}"><button class="button-edit">Edit</button></a>
+                    {# <a href="{{ path('app_crud_edit', {'id': product.price}) }}"><button class="button-edit">Buy now</button></a> #}
+
+
+
+
+                </td>                           {% endif %}
+
             </tr>
         {% else %}
             <tr>
@@ -36,15 +66,64 @@
         {% endfor %}
         </tbody>
     </table>
+                   {% if app.user and is_granted('ROLE_ADMIN') %}
+
 
     <a href="{{ path('app_crud_new') }}"><button>Create new</button></a>
+                            {% endif %}
 
 
-    <style>
-    .title {
-        color: orange;
-    }
-    </style>
+ 
+
+    {% else %}
+    <p>Please <a href="{{ path('app_login') }}">Log in</a> to view the products list.</p>
+    {% endif %}
+
+    
+<style>
+.title {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+p {
+  margin-top: 20px;
+}
+
+</style>
+
 {% endblock %}
 
 

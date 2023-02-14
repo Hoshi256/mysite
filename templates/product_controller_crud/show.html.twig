@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <th>Image</th>
-                <td>{{ product.image }}</td>
+                <td><img src='{{ app.request.getBaseURL() }}/ulpoads/{{ product.image }}'></td>
             </tr>
         </tbody>
     </table>

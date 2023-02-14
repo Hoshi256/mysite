@@ -25,7 +25,7 @@ class CategoryType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new Image([
-                        'maxSize'=> '102400k',
+                        'maxSize'=> '1024k',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
@@ -35,7 +35,7 @@ class CategoryType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid image',
 
                     ])
-                  ],
+                    ],
 
             ])
             ->add('submit',SubmitType::class)

@@ -3,31 +3,52 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
+
+{% if app.user and is_granted('ROLE_USER') %}
+
+
     <h1>Product index</h1>
 
     <table class="table">
         <thead>
             <tr>
+                                {% if app.user and is_granted('ROLE_ADMIN') %}
+
                 <th>Id</th>
+                {% endif %}
+
                 <th>Name</th>
                 <th>Description</th>
-                <th>Price</th>
+                <th>Price($)</th>
                 <th>Image</th>
-                <th>actions</th>
+                 {% if app.user and is_granted('ROLE_ADMIN') %}
+
+                <th>More</th>
+                {% endif %}
+
             </tr>
         </thead>
         <tbody>
         {% for product in products %}
             <tr>
+         {% if app.user and is_granted('ROLE_ADMIN') %}
+
                 <td>{{ product.id }}</td>
+         {% endif %}
+
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
-                <td>{{ product.image }}</td>
-                <td>
-                    <a href="{{ path('app_product_controller_crud_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_product_controller_crud_edit', {'id': product.id}) }}">edit</a>
+                <td><img src='{{ app.request.getBaseURL() }}/ulpoads/{{ product.image }}'></td>  
+   
+                           <td>
+                    <a href="{{ path('app_product_controller_crud_show', {'id': product.id}) }}"><button>Show</button></a>
+                                                                    {% if app.user and is_granted('ROLE_ADMIN') %}
+
+                    <a href="{{ path('app_product_controller_crud_edit', {'id': product.id}) }}"><button>edit</button></a>
                 </td>
+            {% endif %}
+
             </tr>
         {% else %}
             <tr>
@@ -37,5 +58,60 @@
         </tbody>
     </table>
 
+      {% if app.user and is_granted('ROLE_ADMIN') %}
+
+   
     <a href="{{ path('app_product_controller_crud_new') }}">Create new</a>
+      {% endif %}
+
+                              
+        
+    {% else %}
+    <p>Please <a href="{{ path('app_login') }}">Log in</a> to view the products list.</p>
+    {% endif %}
+                        
+<style>
+/* Table styles */
+ table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background-color: #ddd;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+
+    th {
+        background-color: #eee;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        width: 50px;
+        height: 50px;
+    }
+
+    {# a {
+        color: #007bff;
+        text-decoration: none;
+        padding: 5px 10px;
+        background-color: #ddd;
+        border-radius: 5px;
+    } #}
+
+    a:hover {
+        background-color: #ccc;
+    }
+
+</style>
 {% endblock %}

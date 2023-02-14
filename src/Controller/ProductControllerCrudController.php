@@ -5,10 +5,13 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\Product1Type;
 use App\Repository\ProductRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\StripeService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/product/controller/crud')]
 class ProductControllerCrudController extends AbstractController
@@ -24,13 +27,33 @@ class ProductControllerCrudController extends AbstractController
 
 
     #[Route('/new', name: 'app_product_controller_crud_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProductRepository $productRepository): Response
+    public function new(Request $request, ProductRepository $productRepository, SluggerInterface $slugger): Response
     {
         $product = new Product();
         $form = $this->createForm(Product1Type::class, $product);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+          if ($form->isSubmitted() && $form->isValid()) {
+            $Image = $form->get('image')->getData(); 
+            if ($Image) {
+                      $originalFileName = pathinfo($Image->getClientOriginalName(), PATHINFO_FILENAME);
+                      $safeFileName = $slugger->slug($originalFileName);
+                      $newFileName = $safeFileName. '-'.uniqid(). '.'.$Image->guessExtension();
+                       try {
+                        $Image->move(
+                          $this->getParameter('images_directory'),
+                          $newFileName
+
+                        );
+                       } catch (FileException $e) {
+
+                       }
+                       $product->setImage($newFileName);
+
+                      //  $category -> setImage(
+                      //   new File($this->getParameter('images_directory').'/'.$category->getImage())
+                      // );
+                     }
 
             
             $productRepository->save($product, true);
@@ -53,12 +76,34 @@ class ProductControllerCrudController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_product_controller_crud_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
+    public function edit(Request $request, Product $product, ProductRepository $productRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(Product1Type::class, $product);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+          if ($form->isSubmitted() && $form->isValid()) {
+             $Image = $form->get('image')->getData();
+if ($Image) {
+                      $originalFileName = pathinfo($Image->getClientOriginalName(), PATHINFO_FILENAME);
+                      $safeFileName = $slugger->slug($originalFileName);
+                      $newFileName = $safeFileName. '-'.uniqid(). '.'.$Image->guessExtension();
+                       try {
+                        $Image->move(
+                          $this->getParameter('images_directory'),
+                          $newFileName
+
+                        );
+                       } catch (FileException $e) {
+
+                       }
+                       $product->setImage($newFileName);
+
+                      //  $category -> setImage(
+                      //   new File($this->getParameter('images_directory').'/'.$category->getImage())
+                      // );
+                     }
+
+
             $productRepository->save($product, true);
 
             return $this->redirectToRoute('app_product_controller_crud_index', [], Response::HTTP_SEE_OTHER);

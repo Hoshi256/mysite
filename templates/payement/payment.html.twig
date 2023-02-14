@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<form id="payment-form">
+		<div>
+			<label for="card-number">Card number</label>
+			<div id="card-number"></div>
+		</div>
+		<div>
+			<label for="card-expiry">Expiration date</label>
+			<div id="card-expiry"></div>
+		</div>
+		<div>
+			<label for="card-cvc">CVC</label>
+			<div id="card-cvc"></div>
+		</div>
+		<button type="submit">Pay $20.00</button>
+	</form>
+
+	<script>
+		var stripe = Stripe('YOUR_STRIPE_PUBLIC_KEY');
+		var elements = stripe.elements();
+
+		var cardNumber = elements.create('cardNumber');
+		cardNumber.mount('#card-number');
+
+		var cardExpiry = elements.create('cardExpiry');
+		cardExpiry.mount('#card-expiry');
+
+		var cardCvc = elements.create('cardCvc');
+		cardCvc.mount('#card-cvc');
+
+		var form = document.getElementById('payment-form');
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+
+			stripe.createToken(cardNumber).then(function(result) {
+				if (result.error) {
+					// Handle errors here
+					alert('Error: ' + result.error.message);
+				} else {
+					// Send the token to your server
+					var token = result.token;
+					var xhr = new XMLHttpRequest();
+					xhr.open('POST', '{{ path('stripe_payment_process') }}');
+					xhr.setRequestHeader('Content-Type', 'application/json');
+					xhr.send(JSON.stringify({token: token.id}));
+				}
+			});
+		});
+	</script>
+{% endblock %}
