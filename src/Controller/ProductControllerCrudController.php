@@ -5,10 +5,10 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\Product1Type;
 use App\Repository\ProductRepository;
-use App\Service\StripeService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -33,29 +33,26 @@ class ProductControllerCrudController extends AbstractController
         $form = $this->createForm(Product1Type::class, $product);
         $form->handleRequest($request);
 
-          if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $Image = $form->get('image')->getData(); 
-            if ($Image) {
-                      $originalFileName = pathinfo($Image->getClientOriginalName(), PATHINFO_FILENAME);
-                      $safeFileName = $slugger->slug($originalFileName);
-                      $newFileName = $safeFileName. '-'.uniqid(). '.'.$Image->guessExtension();
-                       try {
-                        $Image->move(
+             if ($Image) {
+                $originalFileName = pathinfo($Image->getClientOriginalName(), PATHINFO_FILENAME);
+                 $safeFileName = $slugger->slug($originalFileName);
+                 $newFileName = $safeFileName. '-'.uniqid(). '.'.$Image->guessExtension();
+                try {
+                   $Image->move(
                           $this->getParameter('images_directory'),
                           $newFileName
 
-                        );
-                       } catch (FileException $e) {
+                        ); 
+                } catch (FileException $e) {
 
-                       }
-                       $product->setImage($newFileName);
+                }
+                $product->setImage($newFileName);
+             }
 
-                      //  $category -> setImage(
-                      //   new File($this->getParameter('images_directory').'/'.$category->getImage())
-                      // );
-                     }
 
-            
+
             $productRepository->save($product, true);
 
             return $this->redirectToRoute('app_product_controller_crud_index', [], Response::HTTP_SEE_OTHER);
@@ -67,6 +64,9 @@ class ProductControllerCrudController extends AbstractController
         ]);
     }
 
+
+
+
     #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
@@ -76,34 +76,12 @@ class ProductControllerCrudController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_product_controller_crud_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Product $product, ProductRepository $productRepository, SluggerInterface $slugger): Response
+    public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
     {
         $form = $this->createForm(Product1Type::class, $product);
         $form->handleRequest($request);
 
-          if ($form->isSubmitted() && $form->isValid()) {
-             $Image = $form->get('image')->getData();
-if ($Image) {
-                      $originalFileName = pathinfo($Image->getClientOriginalName(), PATHINFO_FILENAME);
-                      $safeFileName = $slugger->slug($originalFileName);
-                      $newFileName = $safeFileName. '-'.uniqid(). '.'.$Image->guessExtension();
-                       try {
-                        $Image->move(
-                          $this->getParameter('images_directory'),
-                          $newFileName
-
-                        );
-                       } catch (FileException $e) {
-
-                       }
-                       $product->setImage($newFileName);
-
-                      //  $category -> setImage(
-                      //   new File($this->getParameter('images_directory').'/'.$category->getImage())
-                      // );
-                     }
-
-
+        if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->save($product, true);
 
             return $this->redirectToRoute('app_product_controller_crud_index', [], Response::HTTP_SEE_OTHER);
