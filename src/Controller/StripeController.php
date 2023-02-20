@@ -1,7 +1,7 @@
 <?php
  
 namespace App\Controller;
- 
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,11 +20,15 @@ class StripeController extends AbstractController
  
  
     #[Route('/stripe/create-charge', name: 'app_stripe_charge', methods: ['POST'])]
+
+    
     public function createCharge(Request $request)
     {
         Stripe\Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
+
+        $pay = 50;
         Stripe\Charge::create ([
-                "amount" => 5 * 100,
+                "amount" => $pay * 100,
                 "currency" => "usd",
                 "source" => $request->request->get('stripeToken'),
                 "description" => "rascol Payment Test"

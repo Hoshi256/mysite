@@ -45,13 +45,22 @@
    <tfoot>
    <tr>
     <td colspan="3" class="text-right">Total: </td>
-    <td>{{ total }}</td>
+    <td>{{ total}}</td>
     <td></td>
    </tr>
    </tfoot>
+
+ 
    </table>
+
+
+
+
+     <div class="paynow">
+   <a href="{{ path('app_stripe')}}" class="btn btn-succes btn-sm">Pay now</a>
+   </div>
 {% else %}
-  <p>You cart is empmty</p>
+  <p>You cart is empty</p>
 
     
 {% endif %}

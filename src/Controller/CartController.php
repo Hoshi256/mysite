@@ -33,7 +33,10 @@ class CartController extends AbstractController
 
         return $this->render('cart/index.html.twig', [
             'items' => $cartWithData,
-            'total' => $total
+            'total' => $total,
+
+            dd($total)
+
 
         ]);
     }
@@ -55,6 +58,8 @@ class CartController extends AbstractController
         $session->set('cart', $cart);
 
         return $this->redirectToRoute('app_cart');
+
+        
     }
 
         #[Route('/cart/remove/{id}', name: 'cart_remove')]
