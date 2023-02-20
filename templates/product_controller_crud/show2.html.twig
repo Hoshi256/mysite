@@ -3,6 +3,10 @@
 {% block title %}Product{% endblock %}
 
 {% block body %}
+ {% include ('navbar1.html.twig') %}
+
+
+        
     <h1></h1>
 
      <div class="container">
@@ -16,10 +20,10 @@
                 <hr>
                 <b>Description: </b>{{ product.description }}
                 <form class="mt-4 p-4 bg-light" method="post">
-                    <div class="form-group">
+                    {# <div class="form-group">
                         <label for="quantity">Quantity</label>
                         <input type="number" class="form-control" id="quantity">
-                    </div>
+                    </div> #}
                     <a href="{{ path('cart_add', {'id': product.id})}}"button class="btn btn-warning">Add to Cart</a>
                 </form>
             </div>

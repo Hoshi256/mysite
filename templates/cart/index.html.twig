@@ -3,6 +3,9 @@
 {% block title %}Hello CartController!{% endblock %}
 
 {% block body %}
+
+ {% include ('navbar1.html.twig') %}
+
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -10,7 +13,7 @@
 
 <div class="example-wrapper">
    <div class="bg-light p-3">
-   <h1>Votre panier</h1>
+   <h1>You cart</h1>
    </div>
 
 
@@ -33,7 +36,7 @@
         <td>{{ item.quantity}}</td>
         <td>{{ item.product.price * item.quantity }}</td>
         <td>
-        <a href="#" class="btn btn-danger btn-sm"></a>
+        <a href="{{ path('cart_remove', {'id': item.product.id})}}" class="btn btn-danger btn-sm"></a>
         <i class="fas fa-trash"></i>
         </td>
     </tr>
@@ -48,7 +51,7 @@
    </tfoot>
    </table>
 {% else %}
-  <p>Surprise, c'est vide</p>
+  <p>You cart is empmty</p>
 
     
 {% endif %}
