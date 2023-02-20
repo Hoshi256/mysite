@@ -70,7 +70,7 @@ class ProductControllerCrudController extends AbstractController
     #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
-        return $this->render('product_controller_crud/show.html.twig', [
+        return $this->render('product_controller_crud/show2.html.twig', [
             'product' => $product,
         ]);
     }
