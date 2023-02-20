@@ -35,7 +35,7 @@ class CartController extends AbstractController
             'items' => $cartWithData,
             'total' => $total,
 
-            dd($total)
+            // dd($total)
 
 
         ]);
