@@ -1,0 +1,90 @@
+<header>
+  <div class="logo">
+    <a href="#"><img src="logo.png" alt="Logo"></a>
+  </div>
+  
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li></li>
+            <li></li>
+      <li></li>
+            <li></li>
+      <li></li>
+
+
+      <li><a href="#">About Us</a></li>
+    </ul>
+  </nav>
+  
+  <div class="contact-info">
+    <ul>
+      <li><a>Contact</a></li>
+    </ul>
+    <p><i class="fa fa-phone"></i> 01 234 456 234</p>
+  </div>
+</header>
+{% block content %}
+    {% include ('navbar2.html.twig') %}
+{% endblock %}
+<style>
+header {
+  background-color: #0064dc;
+  color: #fff;
+  height: 70px; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.logo {
+  margin-right: 20px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+contact a {
+    color: white;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+}
+
+.contact-info ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-right: 20px;
+}
+
+.contact-info li {
+  margin: 0 10px;
+}
+
+.contact-info p {
+  margin: 0;
+}
+
+.fa-phone {
+  margin-right: 5px;
+}
+
+
+</style>

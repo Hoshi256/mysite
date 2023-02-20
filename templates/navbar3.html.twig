@@ -1,55 +1,61 @@
+{% block content %}
+    
+    <div class="container2">
+    <div class="row">
+    </div>
+    {% include 'bodytemplate.html.twig' %}
+  </div>  
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="carousel-container" style="margin-left: 50px;">
+        {{ include('bodytemplate2.html.twig') }}
+      </div>
+    </div>
+  </div>
+</div> 
+{% endblock %}
 
 
-
- <nav>
- <ul>
-
-        <li><a href="{{ path('app_home') }}">Home</a></li>
-
- {% if is_granted('ROLE_ADMIN') %}
-            <li><a href="{{ path('admin') }}">Admin</a></li>
-
-  {% if app.user %}
-
-
-
-<li>
-Hello, {{ app.user.FirstName}}
-{# {{ app.user.roles[0]}} #}
-{# {{ app.user.roles[1]}} #}
-<img src="./my-avatar2.jpg" alt="">
-</li>
-
-
-<li><a href="{{ path('app_logout') }}">Logout</a></li>
-
-{% else %}
-
-<li><a href="{{ path('app_login') }}">Login</a></li>
-
-{% endif %}
- </ul>
-
- </nav>
-      
-
-
-
-
-
-
-
-
+</body>
 
 
 <style>
-.navbar-brand {
-  font-size: 1,5rem;
-  text-decoration:none;
-  color: #fff;
+body {
+background-image: url('./images/blue-sky-scaled.jpg');
+  background-size: cover;
+  background-repeat: no-repeat; 
+  
 }
 
-.navbar-nav {
-  display: flex;
+{# .carousel-container {
+  margin-top: 10px;
+} #}
+
+
+
+
+.container2 {
+ 
+  /* The fourth parameter is the alpha channel, which controls the transparency of the color. 0.7 sets it to 70% opaque. */
+  padding: 20px;
+  margin-top: 30px;
+  width: 85%;
+  margin-left: auto;
+  margin-right:auto;
+  background-color: grey;
+  border: 2px  solid white;
+
+  
+}
+
+
+@media screen and (min-width: 768px) {
+  .carousel-container {
+    margin-left: 50px;
+  }
 }
 </style>
+<body>
+

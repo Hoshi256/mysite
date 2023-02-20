@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FirstpageController!{% endblock %}
+
+{% block body %}
+
+<div class="image-container">
+
+        <div class="text">
+            <h1>Ille de Dieux</h1>
+            <h2>Bali holiday</h2>
+            
+        </div>
+
+</div>
+
+<div class="button-container">
+<a href="{{ path('app_home')}}" class="btn btn-primary">ENTRY</a>
+</div>
+
+
+
+
+<style>
+
+h1 {
+    font-size: 70px;
+    color: white;
+}
+
+h2 {
+    font-size: 50px;
+    color: white;
+
+}
+body {
+background-image: url('./images/960x0.jpg');
+  background-size: cover;
+  background-repeat: no-repeat; 
+  
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.text {
+    color: white;
+    padding: 1rem;
+    margin-left: 200px;
+
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .20rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.btn-primary {
+  color: #fff;
+  background-color: black;
+  border-color: #007bff;
+}
+</style>
+{% endblock %}
