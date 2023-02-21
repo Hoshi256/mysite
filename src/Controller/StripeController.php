@@ -18,6 +18,8 @@ class StripeController extends AbstractController
         ]);
     }
  
+
+    
  
     #[Route('/stripe/create-charge', name: 'app_stripe_charge', methods: ['POST'])]
 
