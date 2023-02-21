@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Command index{% endblock %}
+
+{% block body %}
+    <h1>Command index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for command in commands %}
+            <tr>
+                <td>{{ command.id }}</td>
+                <td>{{ command.date ? command.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ command.price }}</td>
+                <td>{{ command.quantity }}</td>
+                <td>{{ command.status ? 'Yes' : 'No' }}</td>
+                <td>{{ command.total }}</td>
+                <td>
+                    <a href="{{ path('app_command_show', {'id': command.id}) }}">show</a>
+                    <a href="{{ path('app_command_edit', {'id': command.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_command_new') }}">Create new</a>
+{% endblock %}
