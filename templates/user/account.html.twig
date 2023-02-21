@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte - Dylan's Shop{% endblock %}
+
+{% block body %}
+<section id="account" class="container py-5">
+    <div class="py-4"></div>
+    
+    {# <----- Account Navigation -----> #}
+    <div class="row justify-content-between justify-content-xl-around pt-lg-5">
+        <nav class="col-md-4 col-xl-3 left-block-account py-3 rounded-2 px-0 px-lg-2">
+
+            <ul class="navbar-account ps-lg-2">
+                <h4 class="py-4 ps-4">Bienvenue, {{app.user.first_name}} </h4>
+                <li>
+                    <a class="active" href="{{path('app_account')}}">Tableau de bord</a>
+                </li>
+                <li>
+                    <a href="{{path('app_account_orders')}}">Commandes</a>
+                </li>
+                <li>
+                    <a href="{{path('app_edit_account')}}">Détails du compte</a>
+                </li>
+                <li>
+                    <a href="{{path('app_edit_password')}}">Modifier mon mot de passe</a>
+                </li>
+                <li>
+                    <a href="{{path('app_adress')}}">Adresses</a>
+                </li>
+                <li>
+                    <a href="{{path('app_logout')}}">Se déconnecter</a>
+                </li>
+            </ul>
+        </nav>
+
+        {# <----- Account content -----> #}
+        <div class="col-md-8 pt-5">
+            <p>Bonjour <span class="bold">{{app.user.firstname}},</span></p>
+            <p class="pe-xl-5 me-xl-5">A partir du tableau de bord de votre compte, vous pouvez visualiser vos commandes récentes, gérer votre carnet d'addresses, modifier vos informations personnelles ainsi que changer votre mot de passe.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
