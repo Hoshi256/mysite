@@ -56,16 +56,27 @@
  
    </table>
 
-
+ 
 
 
      <div class="paynow">
+     <p><a class="btn btn-fill-out" href="{{ path('app_home')}}">Poursuivre vos achats</a></p>
+
    <a href="{{ path('app_stripe')}}" class="btn btn-succes btn-sm">Pay now</a>
    </div>
 {% else %}
+<div>
   <p>You cart is empty</p>
+
+</div>
 
     
 {% endif %}
+
+
+
+
+
+
 
 {% endblock %}

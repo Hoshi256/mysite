@@ -25,12 +25,15 @@ class StripeController extends AbstractController
 
     
     public function createCharge(Request $request)
+
+
     {
+        $session = $request->getSession();
         Stripe\Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
 
-        $pay = 50;
+        $total = $session->get('total');
         Stripe\Charge::create ([
-                "amount" => $pay * 100,
+                "amount" => $total * 100,
                 "currency" => "usd",
                 "source" => $request->request->get('stripeToken'),
                 "description" => "rascol Payment Test"
