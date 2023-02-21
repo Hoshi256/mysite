@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une adresse - Dylan's Shop{% endblock %}
+
+{% block body %}
+<section id="account-edit-adress" class="container py-5">
+    <div class="py-4"></div>
+    
+    {# <----- Account Navigation -----> #}
+    <div class="row justify-content-between justify-content-xl-around pt-lg-5">
+        <nav class="col-md-4 col-xl-3 left-block-account py-3 rounded-2 px-0 px-lg-2">
+
+            <ul class="navbar-account ps-lg-2">
+                <h4 class="py-4 ps-4">Bienvenue, {{app.user.firstname}} </h4>
+                <li>
+                    <a href="{{path('app_account')}}">Tableau de bord</a>
+                </li>
+                <li>
+                    <a href="{{path('app_account_orders')}}">Commandes</a>
+                </li>
+                <li>
+                    <a href="{{path('app_edit_account')}}">Détails du compte</a>
+                </li>
+                <li>
+                    <a href="{{path('app_edit_password')}}">Modifier mon mot de passe</a>
+                </li>
+                <li>
+                    <a class="active" href="{{path('app_adress')}}">Adresses</a>
+                </li>
+                <li>
+                    <a href="{{path('app_logout')}}">Se déconnecter</a>
+                </li>
+            </ul>
+        </nav>
+
+        {# <----- Account content -----> #}
+        <div class="col-md-8">
+            <p class="text-end w-100 w-xl-75 mt-3 mt-lg-0">
+                <span class="red bold">*</span> Information requise.
+            </p>
+
+            {# <----- Flash alert -----> #}
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success text-center my-3 py-3">
+                    <i class="fa-solid me-2"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger text-center my-3 py-3">
+                    <i class="fa-solid me-2"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {# <----- Form -----> #}
+            {{ form_start(form, {attr: {'class': 'd-flex flex-column w-100 w-xl-75'}} ) }}
+                
+                <div class="row">
+                    <div class="col-6">
+                        {{ form_row(form.firstname, { label: 'Prénom *', attr : {'class': 'py-2'}} ) }}
+                    </div>
+                    <div class="col-6">
+                        {{ form_row(form.lastname, { label: 'Nom *', attr : {'class': 'py-2'}} ) }}
+                    </div>
+                </div>
+
+                {{ form_row(form.company, { label: "Nom de l'entreprise", attr : {'class': 'py-2'}} ) }}             
+
+                <div class="row">
+                    <div class="col-8">
+                        {{ form_row(form.street, { label: "Adresse postale *", attr : {'class': 'py-2'}} ) }}    
+                    </div>
+                    <div class="col-4">
+                        {{ form_row(form.complement, { label: " ", attr : {'class': 'py-2 mt-4'}} ) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        {{ form_row(form.zipcode, { label: "Code postal *", attr : {'class': 'py-2'}} ) }}
+                    </div>
+                    <div class="col-6">
+                        {{ form_row(form.city, { label: "Ville *", attr : {'class': 'py-2'}} ) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        {{ form_row(form.country, { label: "Pays *", attr : {'class': 'py-2'}} ) }}
+                    </div>
+                    <div class="col-6">
+                        {{ form_row(form.department, { label: "Département/Etat", attr : {'class': 'py-2'}} ) }}
+                    </div>
+                </div>
+
+                {{ form_row(form.main, { label: "Définir comme adresse de livraison principale"} ) }}
+
+                <span class="d-flex justify-content-center text-center">
+                    {{ form_row(form.submit, { label: "Enregistrer les modifications", attr : {'class': 'btn btn-dark py-2 mt-2'}}) }}
+                </span>
+            {{ form_end(form) }}
+            
+            {# <----- Btn Return -----> #}
+            <a href="{{path('app_adress')}}" class="btn btn-outline-dark">
+                <i class="fa-solid fa-angle-left me-1"></i>Retour 
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

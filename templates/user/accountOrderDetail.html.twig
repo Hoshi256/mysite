@@ -1,0 +1,180 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de la commande - Dylan's Shop{% endblock %}
+
+{% block body %}
+<section id="account-orders" class="container py-5">
+    <div class="py-4"></div>
+
+    {# <----- Account Navigation -----> #}
+    <div class="row justify-content-between justify-content-xl-around pt-lg-5">
+        <nav class="col-md-4 col-xl-3 left-block-account py-3 rounded-2 px-0 px-lg-2">
+
+            <ul class="navbar-account ps-lg-2">
+                <h4 class="py-4 ps-4">Bienvenue, {{app.user.firstname}} </h4>
+                <li>
+                    <a href="{{path('app_account')}}">Tableau de bord</a>
+                </li>
+                <li>
+                    <a class="active" href="{{path('app_account_orders')}}">Commandes</a>
+                </li>
+                <li>
+                    <a href="{{path('app_edit_account')}}">Détails du compte</a>
+                </li>
+                <li>
+                    <a href="{{path('app_edit_password')}}">Modifier mon mot de passe</a>
+                </li>
+                <li>
+                    <a href="{{path('app_adress')}}">Adresses</a>
+                </li>
+                <li>
+                    <a href="{{path('app_logout')}}">Se déconnecter</a>
+                </li>
+            </ul>
+        </nav>
+
+        {# <----- Account content -----> #}
+        <div class="col-md-8 pt-5 pt-md-0 d-flex gap-4 flex-wrap justify-content-center justify-content-lg-start">
+        
+            {% for order in detailOrder %}
+            {# <----- Order informations -----> #}
+            <div class="row gap-3 justify-content-md-center justify-content-xl-start">
+                <div class="col-12 col-md-11 col-xl-8">
+                    <ul>
+                        <li>
+                            <span class="almost-bold">Commande effectuée le :</span> {{order.createdAt| format_datetime('long', 'none', locale='fr')}}
+                         </li>
+                        <li>
+                            <span class="almost-bold">Numéro de commande:</span> {{order.id}}
+                        </li>
+                         <li>
+                            <span class="almost-bold">Statut de la commande:</span> {% if order.status == 1 %} En Préparation {% elseif order.status == 2 %} Expédiée {% else %} Livrée {% endif %}
+                        </li>
+                        <li class="mt-3">
+                            <a href="#" class="btn btn-dark">Suivre l'envoi</a>
+                        </li>
+                    </ul>
+                </div>
+
+                {# <----- Product -----> #}
+                <div class="col-12 col-md-11 col-xl-8 d-flex flex-column">
+                    {% for item in order.orderProducts %}
+                    <div class="row border-top-style py-4">
+                        <div class="col-4 col-xl-3">
+                        {% if item.product.id %}
+                            <a href="{{path('product_detail', {'id': item.product.id}) }}">
+                                <img class="img-fluid table-img" src="{{ asset(item.product.img) }}" alt="{{item.product.name}}">
+                            </a>
+                        {% else %}
+                            <img class="img-fluid" src="{{ asset(item.product.img) }}" alt="{{item.product.name}}">
+                        {% endif %}
+                        </div>
+                        <div class="col-8 col-xl-8 align-self-center">
+                            <ul>
+                                <li>
+                                    <h6>
+                                        <strong>
+                                    {% if item.product.id %}
+                                         <a class="light-hover" href="{{path('product_detail', {'id': item.product.id}) }}">{{item.product.name}}</a>
+                                    {% else %}
+                                        {{item.product.name}}
+                                    {% endif %}
+                                        </strong>
+                                    </h6>
+                                </li>
+                                
+                                <li>{{item.price|number_format(2)}}&euro; </li>
+                                <li> 
+                                    <span class="half-bold">Taille:</span> {{item.size}}
+                                </li>
+                                <li>
+                                    <span class="half-bold">Quantité :</span> {{item.quantity}}
+                                </li>
+                                {% set totalProductPrice = item.price * item.quantity %}
+                            </ul> 
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {# <----- Recap -----> #}
+                {% set totalOrderPrice = 0 %}
+            
+                {% for item in order.orderProducts %}
+                    {% set totalOrderPrice = totalOrderPrice + (item.price * item.quantity ) %}    
+                {% endfor %}
+
+                {% set totalTaxPrice = totalOrderPrice * 0.2 %}
+
+                    <div class="col-12 col-md-11 recap col-xl-3 border-top-style py-3">
+                        <span class="almost-bold">Récapitulatif :</span> 
+                        <ul class="py-3">
+                            <li class="pb-1">
+                                <span class="half-bold pe-1">Moyen de paiement :</span> {{order.paymentProvider}}
+                            </li>
+
+                            <li>
+                                <span class="half-bold pe-1">Sous-total :</span> {{totalOrderPrice|number_format(2)}}&euro;
+                            </li>
+
+                            <li class="py-1">
+                                <span class="half-bold pe-1">Livraison :</span> {{order.deliveryCost}}&euro;
+                            </li>
+
+                            <li>
+                                <span class="half-bold pe-1">Total :</span> {{totalOrderPrice|number_format(2)}}&euro; (<small>dont {{(totalTaxPrice|number_format(2))}}</small>&euro; <small>de TVA</small>)
+                            </li>
+                        </ul>
+
+                        {# <----- Addresses -----> #}
+                        <div class="row">
+                            <div class="col-6 col-xl-12 border-top-style py-3">
+                                <span class="almost-bold">Adresse de livraison : </span> 
+                                <ul class="mt-2">
+                                    <li>{% if order.ShippingAddress.company %}{{order.ShippingAddress.company}}{% endif %}</li>
+                                    <li>{{order.ShippingAddress.firstname}} {{order.ShippingAddress.lastname}}</li>
+                                    <li>{{order.ShippingAddress.street}}</li>
+                                    <li>{% if order.ShippingAddress.complement %}{{order.ShippingAddress.complement}}{% endif %}</li>
+                                    <li>{{order.ShippingAddress.city}} {{order.ShippingAddress.zipcode}}</li>
+                                    <li>{% if order.ShippingAddress.department %}{{order.ShippingAddress.department}}{% endif %}</li>
+                                    <li>{{order.ShippingAddress.country}}</li>
+                                </ul>
+                            </div>
+
+                            <div class="col-6 col-xl-12 border-top-style py-3">
+                                <span class="almost-bold">Adresse de facturation : </span> 
+                                <ul class="mt-2">
+                                    <li>{% if order.BillingAddress.company %}{{order.BillingAddress.company}}{% endif %}</li>
+                                    <li>{{order.BillingAddress.firstname}} {{order.BillingAddress.lastname}}</li>
+                                    <li>{{order.BillingAddress.street}}</li>
+                                    <li>{% if order.BillingAddress.complement %}{{order.BillingAddress.complement}}{% endif %}</li>
+                                    <li>{{order.BillingAddress.city}} {{order.BillingAddress.zipcode}}</li>
+                                    <li>{% if order.BillingAddress.department %}{{order.BillingAddress.department}}{% endif %}</li>
+                                    <li>{{order.BillingAddress.country}}</li>
+                                </ul>
+                            </div>
+
+                            {# <----- Need Help ? -----> #}
+                            <div class=" border-top-style pt-3">
+                                <span class="almost-bold">Besoin d'aide ? </span> 
+                                <ul class="mt-2">
+                                    <li>
+                                        <a class="light-hover" href="#">Expédition et livraison</a>
+                                    </li>
+                                    <li> 
+                                        <a class="light-hover" href="#">Annuler une commande</a> 
+                                    </li>
+                                    <li> 
+                                        <a class="light-hover" href="#">Conditions générales de retour</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

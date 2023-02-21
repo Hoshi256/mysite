@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier - Dylan's shop{% endblock %}
+
+{% block body %}
+
+<section id="cart" class="container py-5">
+    <h1 class="text-center py-5 border-bottom-style">Panier</h1>
+
+    {# <----- Alert flash -----> #}
+    {% if app.session.get('products-in-cart') %}
+
+    {% for message in app.flashes('error') %}
+    <div class="alert alert-danger text-center mt-3 mb-2 py-3 col-xl-8 m-auto">
+        {{message|raw}}
+    </div>
+    {% endfor %}
+
+    {# <----- Table -----> #}
+    <div class="pt-2 table-container">
+        <table class="w-100 table">
+            <thead class="bold">
+                <tr>
+                    <td colspan="2">Produit</td>
+                    <td class="text-center">Prix</td>
+                    <td class="text-center">Quantité</td>
+                    <td class="text-center">Sous-total</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in cartWithData %}
+                <tr class="my-3 border-bottom-style">
+                    <td class="img py-3 pe-3">
+                        <a href="{{path('product_detail', {'id': product.id.id}) }}">
+                            <img class="table-img" src="{{ asset(product.id.img) }}" alt="{{product.id.name}}>">
+                        </a>
+                    </td>
+                    <td>
+                        <div class="detail-container">
+                            <div class="name">
+                                <strong>
+                                    <a class="light-hover" href="{{path('product_detail', {'id': product.id.id}) }}">{{product.id.name}}</a>
+                                </strong>
+                            </div>
+                            <span class="half-bold">Taille:</span> {{product.size}}
+
+                            <a class="light-hover d-block" href="{{path('remove_cart', {'id': product.productId}) }}"><small>Supprimer</small></a>
+                        </div>
+                    </td>
+                    <td class="hide-table-responsive">
+                        <span class="price d-flex justify-content-md-center">
+                            {% if product.id.salePrice %}
+                                <span class="discounted-product me-2">{{product.id.price|number_format(2)}}&euro;</span>
+                                <span>{{product.id.salePrice|number_format(2)}}&euro;</span>
+                            {% else %}
+                                {{product.id.price|number_format(2)}}&euro;
+                            {% endif %}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="quantity d-flex justify-content-md-center">
+                            <div class="quantity-container quantity-input-container">
+                                <div class="container-qtt mt-2 align-items-center">
+                                    <a href="{{path('decrease_cart', {'id': product.productId}) }}" class="btn" id="decrease" href="">-</a>
+                                    <input class="btn w-100 no-arrow" type="number" name="quantity" id="qtt" 
+                                    value="{{product.quantity}}" min="1" max="{{product.stock}}" placeholder="Quantity" required>
+                                    <a href="{{path('increase_cart', {'id': product.productId}) }}" class="btn" id="increase">+</a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="total-price d-flex justify-content-md-center">
+                            <span class="show-table-responsive me-1">Sous-total:</span> 
+                            {% if product.id.salePrice %}
+                                <span>{{ (product.quantity * product.id.salePrice)|number_format(2, ',')}}&euro;</span>
+                            {% else %}
+                                <span>{{ (product.quantity * product.id.price)|number_format(2, ',')}}&euro;</span>
+                            {% endif %}
+                        </span>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {# <----- Cart validation -----> #}
+        <div class="row justify-content-end px-3 mt-4">
+            <div class="totals col-4 col-md-3 col-xl-3">
+                <p class="mb-0">
+                    <span class="text bold">Expédition :</span> Livraison gratuite
+                </p>
+                <span class="text bold">Sous-Total :</span> {{totalPrice|number_format(2, ',')}}&euro; 
+                <p> 
+                    {% set totalTaxPrice = totalPrice * 0.2 %}
+
+                    <span class="text bold">Total :</span> {{totalPrice|number_format(2, ',')}}&euro; 
+                    (<small>dont {{(totalTaxPrice|number_format(2))}}</small>&euro; <small> de TVA</small>)
+                </p>
+                <a class="d-flex justify-content-center m-auto btn btn-dark align-items-center" href="{{path('app_checkout')}}">Valider mon panier<i class="fa-solid fa-chevron-right ps-2"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    {# <----- Message if cart is empty -----> #}
+    {% else %}
+    <div class="container-empty text-center pb-5">
+        <h2 class='pt-4'>Votre panier est actuellement vide.</h2><br>
+        <a href='{{path('product_list_category', {'category': 'Nouveautes'}) }}'>
+            <div class='btn btn-dark py-2 mt-3'>
+                <i class="fa-solid fa-chevron-right pe-2"></i>Retour à la boutique
+            </div>
+        </a>
+    </div>
+    {% endif %}
+</section>
+
+{% endblock %}

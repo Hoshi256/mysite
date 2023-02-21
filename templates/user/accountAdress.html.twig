@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresses - Dylan's Shop{% endblock %}
+
+{% block body %}
+<section id="account-adress" class="container py-5">
+    <div class="py-4"></div>
+    
+    {# <----- Account Navigation -----> #}
+    <div class="row justify-content-between justify-content-xl-around pt-lg-5">
+        <nav class="col-md-4 col-xl-3 left-block-account py-3 rounded-2 px-0 px-lg-2">
+
+            <ul class="navbar-account ps-lg-2">
+                <h4 class="py-4 ps-4">Bienvenue, {{app.user.firstname}} </h4>
+                <li>
+                    <a href="{{path('app_account')}}">Tableau de bord</a>
+                </li>
+                <li>
+                    <a href="{{path('app_account_orders')}}">Commandes</a>
+                </li>
+                <li>
+                    <a href="{{path('app_edit_account')}}">Détails du compte</a>
+                </li>
+                <li>
+                    <a href="{{path('app_edit_password')}}">Modifier mon mot de passe</a>
+                </li>
+                <li>
+                    <a class="active" href="{{path('app_adress')}}">Adresses</a>
+                </li>
+                <li>
+                    <a href="{{path('app_logout')}}">Se déconnecter</a>
+                </li>
+            </ul>
+        </nav>
+
+        {# <----- Account content -----> #}
+        <div class="col-md-8 pt-5 pt-md-4 d-flex gap-4 flex-wrap justify-content-center justify-content-lg-start">
+            {% for adress in adresses %}
+
+            {# <----- Orders ----->  #}
+            
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success text-center py-3 col-12 col-xl-10 mb-0 height-mc">
+                    <i class="fa-solid me-2"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger text-center py-3 col-12 col-xl-10 mb-0 height-mc">
+                    <i class="fa-solid me-2"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <div class="col-12 col-md-10 col-lg-5 me-2 height-mc ms-lg-4 ms-xl-0">
+                <div class="card">
+                    {% if adress.main == 1 %}
+                        <div class="card-header text-center bold">Adresse principale</div>
+                    {% else %}
+                        <div class="card-header text-center">Adresse secondaire</div>
+                    {% endif %}
+                    <div class="card-body py-4">
+                        <ul class="ps-xl-4"> </li>
+                                {% if adress.company %} <li>{{adress.company}}</li> {% endif %}
+                                <li>{{adress.firstname}} {{adress.lastname}}</li>
+                                <li>{{adress.street}} {% if adress.complement %}, {{adress.complement}} {% endif %}</li>
+                                <li>{{adress.zipcode}} {{adress.city}}</li>
+                                <li>{{adress.country}}</li>
+                            </ul>
+                    </div>
+                    <div class="card-footer bg-transparent text-center py-2">
+                        <div class="row text-center">
+                            <div class="col-6">
+                                <a class="btn btn-dark" href="{{path('app_edit_adress', {'id': adress.id}) }}">Modifier</a>
+                            </div>
+                            <div class="col-6">
+                                <a class="btn btn-outline-dark" href="{{path('app_delete_adress', {'id': adress.id}) }}">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <div class="col-10 text-center text-lg-start mt-2 ms-lg-4 ms-xl-0">
+            {% if adresses %}
+
+            {% else %}
+                <p>Vous n'avez actuellement aucune adresse de livraison enregistrée. Ajoutez ici une adresse qui sera pré-remplie pour effectuer plus rapidement vos paiements.</p>
+            {% endif %}
+                <a class="btn btn-dark py-2 rounded-5" href="{{ path('app_add_adress') }}">Ajouter une adresse</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
