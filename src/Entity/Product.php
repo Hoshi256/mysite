@@ -34,6 +34,9 @@ class Product
     #[ORM\ManyToMany(targetEntity: Command::class, mappedBy: 'product')]
     private Collection $commands;
 
+    #[ORM\ManyToOne(inversedBy: 'product')]
+    #[ORM\JoinColumn(nullable: false)]
+
     public function __construct()
     {
         $this->commands = new ArrayCollection();
@@ -132,5 +135,8 @@ class Product
 
         return $this;
     }
+
+    
+    
     
 }

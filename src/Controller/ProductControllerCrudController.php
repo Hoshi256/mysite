@@ -19,7 +19,7 @@ class ProductControllerCrudController extends AbstractController
     #[Route('/', name: 'app_product_controller_crud_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
-        return $this->render('product_controller_crud/index2.html.twig', [
+        return $this->render('product_controller_crud/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
     }
