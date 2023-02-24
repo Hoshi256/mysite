@@ -56,14 +56,30 @@
  
    </table>
 
- 
-
-
-     <div class="paynow">
+        <div class="continue">
      <p><a class="btn btn-fill-out" href="{{ path('app_home')}}">Poursuivre vos achats</a></p>
 
+                       {% if app.user %}
+
+  <div class="paynow">
+
    <a href="{{ path('app_stripe')}}" class="btn btn-succes btn-sm">Pay now</a>
+
    </div>
+        
+        
+        
+        
+                           {% else %}
+
+     <div class="paynow">
+     <p><a class="btn btn-fill-out" href="{{ path('app_login')}}">Login ou register you</a></p>
+
+      </div>                    
+
+                              {% endif %}
+
+    
 {% else %}
 <div>
   <p>You cart is empty</p>
