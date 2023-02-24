@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class="row">
+    <div class="medium-12 large-12 columns">
+                <h4>Clients/Booking</h4>
+
+         <div class="medium-2  columns">BOOKING FOR:</div>
+        <div class="medium-2  columns"><b>{{ app.user.FirstName | upper }} {{ app.user.LastName | upper }}</b></div>
+                {# <form action="{{ path('booking', {'user_id': user.id}) }}" method="post"> #}
+
+                  <div class="medium-1  columns">FROM:</div>
+                            {# <div class="medium-2  columns"><input name="form[dateFrom]" value="{{dates.from}}" type="text" class="datepicker" /></div> #}
+
+
+
+    </div>
+</div>
+
+{% endblock %}

@@ -75,4 +75,6 @@ class BookingCrudController extends AbstractController
 
         return $this->redirectToRoute('app_booking_crud_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }
