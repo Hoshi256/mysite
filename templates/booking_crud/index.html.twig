@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Booking index{% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="row">
+<div.medium-12 large-12 columns>
+    <h1>Booking index</h1>
+
+<table class="stack">
+        <thead>
+            <tr>
+
+            <th width="200"><strong>ID</strong></th>
+              <th width="200"><strong>DateIn</strong></th>
+              <th width="200"><strong>DateOut</strong></th>
+            <th width="200"><strong>Price</strong></th>
+            <th width="200"><strong>Nb Persons</strong></th>
+
+
+              <th width="200"><strong>Actions</strong></th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.id }}</td>
+                <td>{{ booking.dateIn ? booking.dateIn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ booking.dateOut ? booking.dateOut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ booking.price }}</td>
+                <td>{{ booking.nbPerson }}</td>
+                <td>
+                    <a href="{{ path('app_booking_crud_show', {'id': booking.id}) }}">show</a>
+                    <a href="{{ path('app_booking_crud_edit', {'id': booking.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+
+</div>
+
+    
+
+    <a href="{{ path('app_booking_crud_new') }}">Create new</a>
+{% endblock %}

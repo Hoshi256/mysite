@@ -34,12 +34,16 @@ class Product
     #[ORM\ManyToMany(targetEntity: Command::class, mappedBy: 'product')]
     private Collection $commands;
 
+    #[ORM\ManyToMany(targetEntity: Booking::class, mappedBy: 'product')]
+    private Collection $no;
+
     #[ORM\ManyToOne(inversedBy: 'product')]
     #[ORM\JoinColumn(nullable: false)]
 
     public function __construct()
     {
         $this->commands = new ArrayCollection();
+        $this->no = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,31 +116,22 @@ class Product
     /**
      * @return Collection<int, Command>
      */
-    public function getCommands(): Collection
+    
+
+    
+
+    
+
+    /**
+     * @return Collection<int, Booking>
+     */
+    public function getNo(): Collection
     {
-        return $this->commands;
-    }
-
-    public function addCommand(Command $command): self
-    {
-        if (!$this->commands->contains($command)) {
-            $this->commands->add($command);
-            $command->addProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommand(Command $command): self
-    {
-        if ($this->commands->removeElement($command)) {
-            $command->removeProduct($this);
-        }
-
-        return $this;
+        return $this->no;
     }
 
     
+   
     
     
 }
