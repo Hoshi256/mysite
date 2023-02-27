@@ -11,7 +11,7 @@
 <div.medium-12 large-12 columns>
     <h1>Booking index</h1>
 
-<table class="stack">
+<table class="table">
         <thead>
             <tr>
 
@@ -20,9 +20,13 @@
               <th width="200"><strong>DateOut</strong></th>
             <th width="200"><strong>Price</strong></th>
             <th width="200"><strong>Nb Persons</strong></th>
-
+            <th width="200"><strong>User</strong></th>
+            <th width="200"><strong>Product</strong></th>
 
               <th width="200"><strong>Actions</strong></th>
+                            
+
+
                
             </tr>
         </thead>
@@ -34,6 +38,8 @@
                 <td>{{ booking.dateOut ? booking.dateOut|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ booking.price }}</td>
                 <td>{{ booking.nbPerson }}</td>
+                <td>{{ booking.user.Lastname }}</td>
+                <td>{{ booking.product.name }}</td>
                 <td>
                     <a href="{{ path('app_booking_crud_show', {'id': booking.id}) }}">show</a>
                     <a href="{{ path('app_booking_crud_edit', {'id': booking.id}) }}">edit</a>
