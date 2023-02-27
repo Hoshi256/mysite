@@ -28,7 +28,9 @@ class ProductControllerCrudController extends AbstractController
 
     #[Route('/new', name: 'app_product_controller_crud_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProductRepository $productRepository, SluggerInterface $slugger): Response
-    {
+    {   
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $product = new Product();
         $form = $this->createForm(Product1Type::class, $product);
         $form->handleRequest($request);
@@ -77,7 +79,9 @@ class ProductControllerCrudController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_product_controller_crud_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
-    {
+    {   
+                $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(Product1Type::class, $product);
         $form->handleRequest($request);
 
@@ -95,7 +99,9 @@ class ProductControllerCrudController extends AbstractController
 
     #[Route('/{id}', name: 'app_product_controller_crud_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
-    {
+    {   
+                $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $productRepository->remove($product, true);
         }

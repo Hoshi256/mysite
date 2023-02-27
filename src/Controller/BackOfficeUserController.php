@@ -15,20 +15,14 @@ class BackOfficeUserController extends AbstractController
     {
         $user=$this->getUser();
 
-        // var_dump($user);
-                    // dd($user->getId());
+    
         $history= $bookingRepository -> findBy([
             'user' => $user,
             
         ]);  
 
         
-        
-        // dd($history);
-        // $booking = [
-
-        // ];
-                    
+       
 
         return $this->render('back_office_user/index.html.twig', [
             'user' => $user,

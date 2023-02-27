@@ -22,7 +22,10 @@ class CategoryController extends AbstractController
 
     #[Route('/category/add', name: 'app_add_category')]     
     public function add(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response     
-    {   $category = new Category();       
+    {   
+                $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $category = new Category();       
         $form = $this->createForm(CategoryType::class, $category);    
         $form->handleRequest($request);       
                  if ($form->isSubmitted() && $form->isValid()) {

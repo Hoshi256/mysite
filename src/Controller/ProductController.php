@@ -14,7 +14,7 @@ class ProductController extends AbstractController
 {
     #[Route('/product/add', name: 'app_add_product')]
     public function add(Request $request, EntityManagerInterface $em):Response
-    {
+    {   
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);

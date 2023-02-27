@@ -17,7 +17,9 @@ class CrudController extends AbstractController
 {
     #[Route('/', name: 'app_crud_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository ): Response
-    {
+    {   
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $this->render('crud/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
         ]);
@@ -25,7 +27,9 @@ class CrudController extends AbstractController
 
     #[Route('/new', name: 'app_crud_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CategoryRepository $categoryRepository, SluggerInterface $slugger): Response
-    {
+    {   
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $category = new Category();
         $form = $this->createForm(Category1Type::class, $category);
         $form->handleRequest($request);
@@ -66,7 +70,9 @@ class CrudController extends AbstractController
 
     #[Route('/{id}', name: 'app_crud_show', methods: ['GET'])]
     public function show(Category $category): Response
-    {
+    {   
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $this->render('crud/show.html.twig', [
             'category' => $category,
         ]);
@@ -74,7 +80,9 @@ class CrudController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_crud_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, CategoryRepository $categoryRepository, SluggerInterface $slugger): Response
-    {
+    {   
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(Category1Type::class, $category);
         $form->handleRequest($request);
 
@@ -113,7 +121,9 @@ class CrudController extends AbstractController
 
     #[Route('/{id}', name: 'app_crud_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
-    {
+    {   
+                $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $categoryRepository->remove($category, true);
         }
