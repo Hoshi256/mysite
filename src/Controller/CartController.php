@@ -20,7 +20,7 @@ class CartController extends AbstractController
         $cart = $session->get('cart', []);        
         $total = 0;
 
-
+                
             $cartWithData=[];
             if (count($cart)!=0 ){
             foreach ($cart as $id => $quantity) {
