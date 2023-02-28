@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class Product1Type extends AbstractType
@@ -19,10 +20,13 @@ class Product1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        
             ->add('name')
             ->add('description')
             ->add('price')
-           
+           ->add('dateIn',DateType::class,array('data'=>new \DateTime()))
+            ->add('dateOut',DateType::class,array('data'=>new \DateTime()))
+
             ->add('image', FileType::class, [
                  'label' => 'image',
                  'mapped' => false,

@@ -37,6 +37,12 @@ class Product
     #[ORM\ManyToMany(targetEntity: Booking::class, mappedBy: 'product')]
     private Collection $no;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateIn = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateOut = null;
+
     #[ORM\ManyToOne(inversedBy: 'product')]
     #[ORM\JoinColumn(nullable: false)]
 
@@ -128,6 +134,30 @@ class Product
     public function getNo(): Collection
     {
         return $this->no;
+    }
+
+    public function getDateIn(): ?\DateTimeInterface
+    {
+        return $this->dateIn;
+    }
+
+    public function setDateIn(\DateTimeInterface $dateIn): self
+    {
+        $this->dateIn = $dateIn;
+
+        return $this;
+    }
+
+    public function getDateOut(): ?\DateTimeInterface
+    {
+        return $this->dateOut;
+    }
+
+    public function setDateOut(\DateTimeInterface $dateOut): self
+    {
+        $this->dateOut = $dateOut;
+
+        return $this;
     }
 
     

@@ -9,13 +9,7 @@
 {% block body %}
 
 
-        
-    <p>test datepicker</p>
-<form action="/action_page.php">
-  <label for="birthday">Date begin:</label>
-  <input type="date" id="birthday" name="birthday">
-  <input type="submit">
-</form>
+ 
 
   
 
@@ -30,7 +24,14 @@
                 <hr>
                 <b>Description: </b>{{ product.description }}
 
+                <div class="date">
 
+             <p>Disponibility date: from {{ product.dateIn |date("d/m/y") }} to {{ product.dateOut |date("d/m/y")  }}</p>
+
+
+        
+           
+                </div>
 
                 <form class="mt-4 p-4 bg-light" method="post">
                     {# <div class="form-group">

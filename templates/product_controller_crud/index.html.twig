@@ -23,7 +23,10 @@
                 <th>Image</th>
                  {% if app.user and is_granted('ROLE_ADMIN') %}
 
-                <th>More</th>
+             
+                <th>Date In</th>
+                <th>Date Out</th>
+                   <th>More</th>
                 {% endif %}
 
             </tr>
@@ -40,7 +43,8 @@
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
                 <td><img src='{{ app.request.getBaseURL() }}/ulpoads/{{ product.image }}'></td>  
-   
+                <td>{{product.dateIn |date("d/m/y") }}</td>
+                <td>{{product.dateOut |date("d/m/y")}}</td>
                            <td>
                     <a href="{{ path('app_product_controller_crud_show', {'id': product.id}) }}"><button>Show</button></a>
                                                                     {% if app.user and is_granted('ROLE_ADMIN') %}
