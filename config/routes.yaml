@@ -9,3 +9,7 @@ kernel:
 register:
     path: /register
     controller: App\Controller\RegistrationController::register
+
+app_generate_pdf:
+    path: '/generate-pdf'
+    controller: 'App\Controller\BackOfficeUserController::generatePdf'

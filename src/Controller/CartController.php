@@ -33,12 +33,12 @@ class CartController extends AbstractController
 
         
          foreach ($cartWithData as $item) {
+            
             $totalItem = $item['product']->getPrice() * $item['quantity'];
             $total += $totalItem;
         }
             $session->set('total', $total);
         } else {
-
 
         }
 
@@ -55,7 +55,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/cart/add/{id}', name: 'cart_add')]
+    #[Route('/cart/add/{id}/quantity', name: 'cart_add')]
     
     public function add($id, SessionInterface $session, Environment $twig) {
         // $session = $request->getSession();

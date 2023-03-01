@@ -18,6 +18,9 @@
         <th width="200"><strong>DateOut</strong></th>
         <th width="200"><strong>Price</strong></th>
         <th width="200"><strong>Nb Persons</strong></th>
+        <th width="200"><strong>Facture</strong></th>
+
+
     </tr>
     </thead>
     <tbody>
@@ -30,6 +33,8 @@
         <td>{{ booking.dateOut|date('Y-m-d') }}</td>
         <td>{{ booking.price }}</td>
         <td>{{ booking.nbPerson }}</td>
+        <td>
+ <a href="{{ path('app_generate_invoice') }}?booking={{ booking.id }}">Download PDF</a> </td>
 </tr>
        
         {% endfor %}
