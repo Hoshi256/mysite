@@ -74,22 +74,14 @@ class SecurityController extends AbstractController
 
                     // Envoi du mail
                 $mail->send(
-                    'no-reply@e-commerce.fr',
+                    'daniela.puscoiu@gmail.com',
                     $user->getEmail(),
                     'Réinitialisation de mot de passe',
                     'password_reset',
                     $context
                 );
 
-                    // Envoi du mail
-                $mail->send(
-                    'no-reply@e-commerce.fr',
-                    $user->getEmail(),
-                    'Réinitialisation de mot de passe',
-                    'password_reset',
-                    $context
-                );
-
+              
 
                 $this->addFlash('success', 'Email envoyé avec succès');
                 return $this->redirectToRoute('app_login');
