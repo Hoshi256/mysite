@@ -46,6 +46,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     
 
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    private $resetToken;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +168,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
+    }
     
 }

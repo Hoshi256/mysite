@@ -36,7 +36,7 @@
                 <input type="password" name="password" id="inputPassword" class="form-control py-2 mb-2" autocomplete="current-password" required>
 
                 <small class="text-end mb-3">
-                    <a href="#">Mot de passe oublié ?</a>
+                    <a href="{{ path('forgotten_password') }}">Mot de passe oublié ?</a>
                 </small>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
