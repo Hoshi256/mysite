@@ -8,6 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GoogleController extends AbstractController
@@ -18,8 +19,6 @@ class GoogleController extends AbstractController
             $mail = new PHPMailer(true);
 
         try{
-    // Confoguration
-
     // $mail ->SMTPDebug = SMTP::DEBUG_SERVER;
 
     $mail->isSMTP();
@@ -27,37 +26,27 @@ class GoogleController extends AbstractController
     $mail->Port = 587;
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'ing.topaz@gmail.com';                     //SMTP username
-    $mail->Password   = 'uuuiehtmaqnmzjpu';                               //SMTP password
-    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-
-    //xgarset
-
-  
-
-
-    //destinateire
-
-    $mail->addAddress("daniela.puscoiu@gmail.com");
-    $mail->addCC("copie@yahoo.com");
-
-  //extediteur
+    $mail->Password   = 'uuuiehtmaqnmzjpu';   
+    $mail->setLanguage('fr', '/optional/path/to/language/directory/');
+                            //SMTP password
+    
+    $to = $request->request->get('to');
+    // $cc = $request->request->get('cc');
+    $mail->addAddress($to);
 
     // $mail->setFrom("no-reply@site.fr");
 
     $subject = $request->request->get('subject');
     $body = $request->request->get('body');
-    
-
-    
-            
+       
     $mail->Subject = $subject;
     $mail->Body = $body;
 
 
-    //contenu
-
-    // $mail->Subject = "message send from symfony";
-    // $mail->Body = "bjfhf fkuzfhkuf fhkufhfg";
+            $attachment = $request->files->get('attachment');
+            if ($attachment instanceof UploadedFile) {
+                $mail->addAttachment($attachment->getPathname(), $attachment->getClientOriginalName());
+            }
 
   //  On envoie 
 
@@ -65,7 +54,7 @@ class GoogleController extends AbstractController
     echo 'message has been sent';
 
 }catch(Exception){
-    echo "Message non envoyé. Error: {$mail -> ErrorInfo}";
+    // echo "Message non envoyé. Error: {$mail -> ErrorInfo}";
 }
 
 
