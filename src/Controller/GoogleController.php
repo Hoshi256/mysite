@@ -42,6 +42,8 @@ class GoogleController extends AbstractController
     $mail->Subject = $subject;
     $mail->Body = $body;
 
+    $mail->isHTML();
+
 
             $attachment = $request->files->get('attachment');
             if ($attachment instanceof UploadedFile) {
@@ -53,9 +55,12 @@ class GoogleController extends AbstractController
     $mail->send();
     echo 'message has been sent';
 
-}catch(Exception){
-    // echo "Message non envoyé. Error: {$mail -> ErrorInfo}";
-}
+    } catch (Exception $e) {
+            $message = [
+                'text' => 'An error occurred while sending the email: ' . $mail->ErrorInfo,
+                'type' => 'danger',
+            ];
+        }
 
 
 

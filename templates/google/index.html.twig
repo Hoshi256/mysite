@@ -2,26 +2,77 @@
 
 {% block title %}Hello GoogleController!{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-wOkI+rldtbZ9poyxDjKcZf+jkt2Q+LMoI5YKmwo0mzJvjEod1/DI9XmLhPjKZmIFwNzmnNDbux45JIdR+mOQLg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Add your custom CSS here */
+        .form-group label {
+            font-weight: bold;
+        }
+        .alert {
+            margin-top: 10px;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
- <h1>Send email</h1>
-    {% if message is defined %}
-        <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
-    {% endif %}
-    <form action="{{ path('app_mail') }}" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-             <label for="to">To</label>
-            <input type="email" id="to" name="to" class="form-control" required>
-             {# <label for="cc">Cc</label>
-            <input type="email" id="cc" name="cc" class="form-control"> #}
-          <label for="attachment">Attachment</label>
+    <div class="container">
+        <h1 class="my-4">Send email</h1>
+        {% if message is defined %}
+            <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+        {% endif %}
+        <form action="{{ path('app_mail') }}" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="to" class="form-label">To</label>
+                <input type="email" id="to" name="to" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="cc" class="form-label">Cc</label>
+                <input type="email" id="cc" name="cc" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label for="attachment" class="form-label">Attachment</label>
+    <label class="custom-file-upload">
+        
         <input type="file" id="attachment" name="attachment" class="form-control-file">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="body">Body</label>
-            <textarea id="body" name="body" class="form-control" required></textarea>
-        </div>
-        <button class="btn btn-primary">Send email</button>
-    </form>
+    </label>
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" id="subject" name="subject" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Body</label>
+                <textarea id="body" name="body" class="form-control" rows="5" required></textarea>
+                <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+                <script>
+                    CKEDITOR.replace('body');
+                </script>
+            </div>
+            <button class="btn btn-primary">Send email</button>
+        </form>
+    </div>
+
+
+    <style>
+    input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.custom-file-upload::before {
+    content: "\f0c6"; /* paper clip icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+    </style>
 {% endblock %}
