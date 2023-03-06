@@ -3,18 +3,20 @@
 {% block title %}Hello GoogleController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/mysite/src/Controller/GoogleController.php'|file_link(0) }}">src/Controller/GoogleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/mysite/templates/google/index.html.twig'|file_link(0) }}">templates/google/index.html.twig</a></code></li>
-    </ul>
-</div>
+ <h1>Send email</h1>
+    {% if message is defined %}
+        <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+    {% endif %}
+    <form action="{{ path('app_mail') }}" method="post">
+        <div class="form-group">
+        
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="body">Body</label>
+            <textarea id="body" name="body" class="form-control" required></textarea>
+        </div>
+        <button class="btn btn-primary">Send email</button>
+    </form>
 {% endblock %}

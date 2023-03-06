@@ -19,25 +19,18 @@ class MailerController extends AbstractController
          $email = (new Email())
             ->from('ing.topaz@gmail.com')
             
-            // ->from(new Address('ing.topaz@gmail.com'))
-
             ->to('daniela.puscoiu@gmail.com')
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
+            
             ->subject('Time for Symfony Mailer!')
             ->text('Sending emails is fun again!')
             ->html('<p>See Twig integration for better HTML integration!</p>');
 
 
 
-                                                // dd($email);
-
-
+                                                
         try {
-            $mailer->send($email);
-
+           $mailer->send($email);
+                            
             $message = 'Your email was sent successfully!';
                     // dd($email);
 
@@ -48,13 +41,6 @@ class MailerController extends AbstractController
         }
 
             
-    // some error prevented the email sending; display an
-    // error message or try to resend the message
-
-
-        // ..
-
-
 
         return $this->render('mailer/index.html.twig', [
             'message' => $message,
