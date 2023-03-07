@@ -2,19 +2,56 @@
 
 {% block title %}Hello ContactController!{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-wOkI+rldtbZ9poyxDjKcZf+jkt2Q+LMoI5YKmwo0mzJvjEod1/DI9XmLhPjKZmIFwNzmnNDbux45JIdR+mOQLg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Add your custom CSS here */
+        .form-group label {
+            font-weight: bold;
+        }
+        .alert {
+            margin-top: 10px;
+        }
+    </style>
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container">
+        <h1 class="my-4">Contact us</h1>
+            {% if message is defined %}
+            <div class="alert alert-{{ message.type }}">{{ message.text }}</div>
+            {% endif %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/mysite/src/Controller/ContactController.php'|file_link(0) }}">src/Controller/ContactController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/mysite/templates/contact/index.html.twig'|file_link(0) }}">templates/contact/index.html.twig</a></code></li>
-    </ul>
+   <form action="{{ path('app_contact') }}" method="post" enctype="multipart/form-data">
+        
+           
+           
+            <div class="mb-3">
+                <label for="subject" class="form-label">You mail</label>
+                <input type="email" id="subject" name="subject" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">You messagee</label>
+                <textarea id="body" name="body" class="form-control" rows="5" required></textarea>
+
+                 <div class="mb-3">
+            <label for="attachment" class="form-label">Attachment</label>
+        <label class="custom-file-upload">
+        
+        <input type="file" id="attachment" name="attachment" class="form-control-file">
+        </label>
+            </div>
+                <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+                <script>
+                    CKEDITOR.replace('body');
+                </script>
+            </div>
+            <button class="btn btn-primary">Send email</button>
+        </form>
+
+
 </div>
+
+
 {% endblock %}
