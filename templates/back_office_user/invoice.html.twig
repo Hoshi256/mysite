@@ -5,9 +5,85 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        .info {
+            margin-top: 20px;
+        }
+        .info td {
+            padding: 5px;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 30px;
+        }
+        .table th, .table td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        .total {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    
-    <p> this is a facture</p>
+    <h1>Invoice</h1>
+    <div class="info">
+        <table>
+            <tr>
+                <td>From:</td>
+                <td>my site </td>
+            </tr>
+            <tr>
+                <td>To:</td>
+                <td>{{ user.FirstName }}{{user.LastName}}</td>
+                <td>{{ user.email }}</td>
+
+            </tr>
+            <tr>
+                <td>Date: {{ date|date('Y-m-d') }} </td>
+                {# <td>{{ booking.createdAt|date('d/m/Y') }}</td> #}
+            </tr>
+        </table>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ booking.product.name }}</td>
+                <td>{{ booking.product.price }} EUR</td>
+
+            </tr>
+        </tbody>
+    </table>
+    <div class="total">
+            <p>Price TTC {{priceWithoutTva}}</p>
+              <p>TVA {{tva}}</p>
+
+
+        <p>Total amount: {{ booking.product.price }} EUR</p>
+
+
+
+        
+    </div>
 </body>
 </html>
