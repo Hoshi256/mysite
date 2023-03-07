@@ -39,8 +39,15 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-fill-out btn-block" name="register">Valider</button>
                             </div>
-
                             <div class="form-note text-center">You have already a count??<a href="{{ path('app_login')}}">Se connecter maintenant</a></div>
+
+                            <input type="hidden" id="form_captcha" name="form[captcha]" /><script>
+    var recaptchaCallback_form_captcha = function() {
+    grecaptcha.execute('<6LdPFuAkAAAAAApHk0zWwlUVW3D8Y1gRE3BN6tiD>', {action: 'landing'}).then(function(token) {
+    document.getElementById('form_captcha').value = token;
+    });
+    };
+    </script><script src="https://www.google.com/recaptcha/api.js?render=<6LdPFuAkAAAAAApHk0zWwlUVW3D8Y1gRE3BN6tiD>&onload=recaptchaCallback_form_captcha" async defer></script> 
                         {{ form_end(registrationForm) }}
 
                         </div>
