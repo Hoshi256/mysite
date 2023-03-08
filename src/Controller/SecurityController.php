@@ -35,14 +35,7 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
-       #[Route(path: '/connect/github', name: 'github_connect')]
-
-    // public function connect(ClientRegistry $clientRegistry): RedirectResponse 
-    // {
-    //     $client = $clientRegistry->getClient('github');
-    //     return $client->redirect(['read:user', 'user :email']);
-    // }
-
+       
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): Response
