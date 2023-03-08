@@ -25,8 +25,8 @@ class GoogleController extends AbstractController
     $mail->Host = "smtp.gmail.com";
     $mail->Port = 587;
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'ing.topaz@gmail.com';                     //SMTP username
-    $mail->Password   = 'uuuiehtmaqnmzjpu';   
+    $mail->Username   = 'daniela.puscoiu@gmail.com';                     //SMTP username
+    $mail->Password   = 'yupppwccfpbaigsn';   
     $mail->setLanguage('fr', '/optional/path/to/language/directory/');
                             //SMTP password
     
