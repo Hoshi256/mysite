@@ -30,6 +30,9 @@ class StripeController extends AbstractController
     {
         $session = $request->getSession();
         Stripe\Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
+    $user = $this->getUser();
+
+    
 
         $total = $session->get('total');
         Stripe\Charge::create ([
@@ -42,6 +45,8 @@ class StripeController extends AbstractController
             'success',
             'Payment Successful!'
         );
+
+
         return $this->redirectToRoute('app_save_booking', [], Response::HTTP_SEE_OTHER);
     }
 }
