@@ -43,6 +43,9 @@ class Product
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateOut = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $stock = null;
+
     #[ORM\ManyToOne(inversedBy: 'product')]
     #[ORM\JoinColumn(nullable: false)]
 
@@ -156,6 +159,18 @@ class Product
     public function setDateOut(\DateTimeInterface $dateOut): self
     {
         $this->dateOut = $dateOut;
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }

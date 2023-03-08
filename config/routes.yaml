@@ -13,3 +13,7 @@ register:
 app_generate_pdf:
     path: '/generate-pdf'
     controller: 'App\Controller\BackOfficeUserController::generatePdf'
+
+oauth_check:
+    path: /oauth/check/{service}
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController

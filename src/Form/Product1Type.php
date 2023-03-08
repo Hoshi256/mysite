@@ -26,7 +26,7 @@ class Product1Type extends AbstractType
             ->add('price')
            ->add('dateIn',DateType::class,array('data'=>new \DateTime()))
             ->add('dateOut',DateType::class,array('data'=>new \DateTime()))
-
+            ->add('stock')
             ->add('image', FileType::class, [
                  'label' => 'image',
                  'mapped' => false,
