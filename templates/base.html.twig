@@ -30,11 +30,12 @@
 
     <body>
      {% include ('navbar.html.twig') %}
+     
 {% if app.user and app.user.isVerified == false %}
 <div class="alert alert-warning alert-dismissible" role="alert">
 <button tupe="button" class="btn-close" data-bs-dismiss= "alert" aria-label="close"></button>
 <div class="alert-lessage">
-<strong>You coount are not verified, please send the activation link</strong>
+<strong>You account are not verified, please click to the activation link</strong>
 </div>
 </div>
 
