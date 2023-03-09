@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comments;
 use App\Entity\Product;
 use App\Form\Product1Type;
 use App\Repository\ProductRepository;
@@ -70,13 +71,22 @@ class ProductControllerCrudController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET'])]
-    public function show(Product $product): Response
+    public function show(Product $product, $id): Response
     {
+
+        $comments = new Comments();
+        $comments->setProductId($id);
+
         return $this->render('product_controller_crud/show2.html.twig', [
             'product' => $product,
         ]);
     }
 
+
+
+    // edit product
+
+    
     #[Route('/{id}/edit', name: 'app_product_controller_crud_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
     {   
