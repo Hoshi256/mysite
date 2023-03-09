@@ -105,25 +105,25 @@ $priceWithoutTva = $totalPrice - $tva;
         // dd($email);
     
 
-                $mail = new PHPMailer(true);
+        $mail = new PHPMailer(true);
 
 
-                        try {
-                            $mail->isSMTP();
-        $mail->Host = "smtp.gmail.com";
-        $mail->Port = 587;
-        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'daniela.puscoiu@gmail.com';                     //SMTP username
-        $mail->Password   = 'yupppwccfpbaigsn';   
-                            $mail->Body = 'Hello, this is the content of the email message.';
-                            $mail->msgHTML('<p>Hello, this is the content of the email message.</p>');
-        $mail->setFrom("no-reply@site.fr");
-        $mail->addAddress($user->getEmail());
-        $mail->Subject = 'Invoice for booking #' . $booking->getId();
+            try {
+                $mail->isSMTP();
+                $mail->Host = "smtp.gmail.com";
+                $mail->Port = 587;
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'daniela.puscoiu@gmail.com';                     //SMTP username
+                $mail->Password   = 'yupppwccfpbaigsn';   
+                $mail->Body = 'Hello, this is the content of the email message.';
+                $mail->msgHTML('<p>Hello, this is the content of the email message.</p>');
+                $mail->setFrom("no-reply@site.fr");
+                $mail->addAddress($user->getEmail());
+                $mail->Subject = 'Invoice for booking #' . $booking->getId();
 
-        $mail->addStringAttachment($pdfContents, 'invoice.pdf', PHPMailer::ENCODING_BASE64, 'application/pdf');
+                $mail->addStringAttachment($pdfContents, 'invoice.pdf', PHPMailer::ENCODING_BASE64, 'application/pdf');
 
-        $mail->send();
+                $mail->send();
 
         $response = new Response($dompdf->output());
         $response->headers->set('Content-Type', 'application/pdf');
