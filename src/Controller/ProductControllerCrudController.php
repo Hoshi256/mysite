@@ -70,41 +70,25 @@ class ProductControllerCrudController extends AbstractController
     }
 
 
-
-
-    #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET'])]
-    public function show(Product $product, Request $request, ProductRepository $productRepository, EntityManagerInterface $em): Response
+#[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET', 'POST'])]
+public function show(Product $product, Request $request, ProductRepository $productRepository, EntityManagerInterface $em): Response
 {
-    $user=$this->getUser();
-     
+    $user = $this->getUser();
+
     $comment = new Comment();
     $form = $this->createForm(CommentType::class, $comment);
     $form->handleRequest($request);
-   
-       if ($form->isSubmitted() && !$form->isValid()) {
-        dump($form->getErrors(true, true));
-        
-        $formData = $form->getData();
-        if ($formData->getStar() !== null) {
-            $comment->setStar($formData->getStar());
-        }
-        if ($formData->getComment() !== null) {
-            $comment->setComment($formData->getComment());
-        }
 
+    if ($form->isSubmitted() && $form->isValid()) {
+        $comment = $form->getData();
         $comment->setUser($user);
         $comment->setProduct($product);
-
-
-    
 
         try {
             $em->persist($comment);
             $em->flush();
 
             $this->addFlash('success', 'Your comment has been added successfully!');
-
-                    // dump($comment->getId()); // Should output the ID of the saved comment
         } catch (\Exception $e) {
             $this->addFlash('error', 'Failed to save comment: ' . $e->getMessage());
         }
@@ -116,11 +100,11 @@ class ProductControllerCrudController extends AbstractController
         'product' => $product,
         'form' => $form->createView(),
     ]);
-
+}
 
 
     
-}
+    
 
 
 
