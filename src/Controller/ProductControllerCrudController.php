@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Product;
 use App\Form\Product1Type;
+use App\Form\CommentType;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -70,12 +73,43 @@ class ProductControllerCrudController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET'])]
-    public function show(Product $product): Response
+    public function show(Product $product, Request $request, ProductRepository $productRepository, EntityManagerInterface $entityManagerInterface): Response
     {
+        $user=$this->getUser();
+        
+
+        $comment = new Comment();
+        $comment->setProduct($product);
+        $comment->setUser($user);
+
+       
+        
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) 
+
+        {
+           
+        
+            $entityManagerInterface->persist($comment);
+            $entityManagerInterface->flush();
+
+            $this->addFlash('success', 'Your comment has been added successfully!');
+
+            // Redirect to the show page for the product
+            return $this->redirectToRoute('app_product_controller_crud_show', ['id' => $product->getId()]);
+        }
+             
+
+
         return $this->render('product_controller_crud/show2.html.twig', [
             'product' => $product,
+            'form' => $form->createView(),
         ]);
     }
+
+
+
 
     #[Route('/{id}/edit', name: 'app_product_controller_crud_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
