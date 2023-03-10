@@ -89,11 +89,11 @@ class ProductControllerCrudController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) 
 
         {
-           
         
             $entityManagerInterface->persist($comment);
             $entityManagerInterface->flush();
 
+            // $this->redirectToRoute('app_product_controller_crud_index', [], Response::HTTP_SEE_OTHER);
             $this->addFlash('success', 'Your comment has been added successfully!');
 
             // Redirect to the show page for the product

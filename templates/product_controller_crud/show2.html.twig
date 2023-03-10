@@ -46,9 +46,18 @@
                 </form>
             </div>
         </div>
+         <a href="{{ path('app_product_controller_crud_index') }}">back to list</a>
     </div>
 
-    <a href="{{ path('app_product_controller_crud_index') }}">back to list</a>
+   
+
+          <h1>Add Comment</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.comment) }}
+        {{ form_row(form.star) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
   <script>
   let qte = document.getElementById('qte');
 
