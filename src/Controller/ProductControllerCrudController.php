@@ -81,7 +81,9 @@ class ProductControllerCrudController extends AbstractController
     $form = $this->createForm(CommentType::class, $comment);
     $form->handleRequest($request);
    
-       if ($form->isSubmitted() && $form->isValid()) {
+       if ($form->isSubmitted() && !$form->isValid()) {
+        dump($form->getErrors(true, true));
+        
         $formData = $form->getData();
         if ($formData->getStar() !== null) {
             $comment->setStar($formData->getStar());
@@ -101,6 +103,8 @@ class ProductControllerCrudController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Your comment has been added successfully!');
+
+                    // dump($comment->getId()); // Should output the ID of the saved comment
         } catch (\Exception $e) {
             $this->addFlash('error', 'Failed to save comment: ' . $e->getMessage());
         }
