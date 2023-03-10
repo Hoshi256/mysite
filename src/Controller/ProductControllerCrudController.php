@@ -74,8 +74,8 @@ class ProductControllerCrudController extends AbstractController
     public function show(Product $product, $id): Response
     {
 
-        $comments = new Comments();
-        $comments->setProductId($id);
+        // $comments = new Comments();
+        // $comments->setProductId($id);
 
         return $this->render('product_controller_crud/show2.html.twig', [
             'product' => $product,
