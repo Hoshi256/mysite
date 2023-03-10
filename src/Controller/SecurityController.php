@@ -101,7 +101,7 @@ class SecurityController extends AbstractController
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;          // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged 
         
 
-        $mail->setFrom('your-email@gmail.com', 'Your Name');
+        $mail->setFrom("no-reply@site.com", "no-reply@site.com");
         $mail->addAddress($user->getEmail(), $user->getFirstName());     
  
          $mail->isHTML(true);                                        // Set email format to HTML
