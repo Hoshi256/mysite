@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CommentType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('comment', TextareaType::class, [
@@ -28,6 +28,7 @@ class CommentType extends AbstractType
                     'max' => 5,
                     'step' => 1,
                 ],
+                'data' => 1, // set a default value for the star field
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Submit',

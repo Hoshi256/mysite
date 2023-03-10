@@ -73,40 +73,50 @@ class ProductControllerCrudController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET'])]
-    public function show(Product $product, Request $request, ProductRepository $productRepository, EntityManagerInterface $entityManagerInterface): Response
-    {
-        $user=$this->getUser();
-        
-
-        $comment = new Comment();
-        $comment->setProduct($product);
-        $comment->setUser($user);
-
-       
-        
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) 
-
-        {
-        
-            $entityManagerInterface->persist($comment);
-            $entityManagerInterface->flush();
-
-            // $this->redirectToRoute('app_product_controller_crud_index', [], Response::HTTP_SEE_OTHER);
-            $this->addFlash('success', 'Your comment has been added successfully!');
-
-            // Redirect to the show page for the product
-            return $this->redirectToRoute('app_product_controller_crud_show', ['id' => $product->getId()]);
+    public function show(Product $product, Request $request, ProductRepository $productRepository, EntityManagerInterface $em): Response
+{
+    $user=$this->getUser();
+     
+    $comment = new Comment();
+    $form = $this->createForm(CommentType::class, $comment);
+    $form->handleRequest($request);
+   
+       if ($form->isSubmitted() && $form->isValid()) {
+        $formData = $form->getData();
+        if ($formData->getStar() !== null) {
+            $comment->setStar($formData->getStar());
         }
-             
+        if ($formData->getComment() !== null) {
+            $comment->setComment($formData->getComment());
+        }
+
+        $comment->setUser($user);
+        $comment->setProduct($product);
 
 
-        return $this->render('product_controller_crud/show2.html.twig', [
-            'product' => $product,
-            'form' => $form->createView(),
-        ]);
+    
+
+        try {
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash('success', 'Your comment has been added successfully!');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Failed to save comment: ' . $e->getMessage());
+        }
+
+        return $this->redirectToRoute('app_product_controller_crud_show', ['id' => $product->getId()]);
     }
+
+    return $this->render('product_controller_crud/show2.html.twig', [
+        'product' => $product,
+        'form' => $form->createView(),
+    ]);
+
+
+
+    
+}
 
 
 

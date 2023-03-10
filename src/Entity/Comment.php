@@ -44,14 +44,16 @@ class Comment
         return $this;
     }
 
+
+
     public function getStar(): ?int
     {
         return $this->star;
     }
 
-    public function setStar(int $star): self
+    public function setStar(?int $star): self
     {
-        $this->star = $star;
+        $this->star = $star !== null ? $star : 4;
 
         return $this;
     }
