@@ -49,43 +49,46 @@
          <a href="{{ path('app_product_controller_crud_index') }}">back to list</a>
     </div>
 
-   
-<h1>Add Comment</h1>
-
-{{ form_start(form) }}
+<div class="col-lg-6 mx-auto">
+  <h2 class="text-center mb-4">Add Comment</h2>
+  {{ form_start(form) }}
     {{ form_row(form.comment) }}
     {{ form_row(form.star) }}
     {{ form_row(form.submit) }}
-{{ form_end(form) }}
-
+  {{ form_end(form) }}
+</div>
 
 {% if comments|length > 0 %}
-    <div class="comments-section">
-        <h2>Comments</h2>
-        <ul class="comments-list">
+    <div class="container">
+        <hr>
+        <h2 class="text-center mb-4">Comments</h2>
+        <div class="row">
             {% for comment in comments %}
-                <li class="comment">
-                    <div class="comment-header">
-                        <span class="comment-user">{{ comment.user.FirstName }}</span>
-                        {# <span class="comment-date">{{ comment.createdAt|date('m/d/Y H:i:s') }}</span> #}
-                    </div>
-                    <div class="comment-body">
-                        <p>{{ comment.comment }}</p>
-                        <div class="comment-rating">
-                            {% for i in 1..5 %}
-                                {% if i <= comment.star %}
-                                    <i class="fas fa-star"></i>
-                                {% else %}
-                                    <i class="far fa-star"></i>
-                                {% endif %}
-                            {% endfor %}
+                <div class="col-md-3 mb-4">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ comment.user.FirstName }}</h5>
+                            <p class="card-text">{{ comment.comment }}</p>
+                            <div class="comment-rating">
+                                {% for i in 1..5 %}
+                                    {% if i <= comment.star %}
+                                        <i class="fas fa-star text-warning"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
-                </li>
+                </div>
+                {% if loop.index % 4 == 0 %}
+                    </div><hr><div class="row">
+                {% endif %}
             {% endfor %}
-        </ul>
+        </div>
     </div>
 {% endif %}
+
 
 
          
