@@ -6,6 +6,7 @@ use App\Entity\Comment;
 use App\Entity\Product;
 use App\Form\Product1Type;
 use App\Form\CommentType;
+use App\Repository\CommentRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,7 +72,7 @@ class ProductControllerCrudController extends AbstractController
 
 
 #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET', 'POST'])]
-public function show(Product $product, Request $request, ProductRepository $productRepository, EntityManagerInterface $em): Response
+public function show(Product $product, Request $request, ProductRepository $productRepository, CommentRepository $commentRepository, EntityManagerInterface $em): Response
 {
     $user = $this->getUser();
 
@@ -96,8 +97,12 @@ public function show(Product $product, Request $request, ProductRepository $prod
         return $this->redirectToRoute('app_product_controller_crud_show', ['id' => $product->getId()]);
     }
 
+    $comments = $commentRepository->findBy(['product' => $product]);
+
     return $this->render('product_controller_crud/show2.html.twig', [
         'product' => $product,
+        'comments' => $comments,
+
         'form' => $form->createView(),
     ]);
 }

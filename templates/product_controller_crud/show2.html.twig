@@ -50,14 +50,46 @@
     </div>
 
    
+<h1>Add Comment</h1>
 
-          <h1>Add Comment</h1>
+{{ form_start(form) }}
+    {{ form_row(form.comment) }}
+    {{ form_row(form.star) }}
+    {{ form_row(form.submit) }}
+{{ form_end(form) }}
 
-    {{ form_start(form) }}
-        {{ form_row(form.comment) }}
-        {{ form_row(form.star) }}
-        {{ form_row(form.submit) }}
-    {{ form_end(form) }}
+
+{% if comments|length > 0 %}
+    <div class="comments-section">
+        <h2>Comments</h2>
+        <ul class="comments-list">
+            {% for comment in comments %}
+                <li class="comment">
+                    <div class="comment-header">
+                        <span class="comment-user">{{ comment.user.FirstName }}</span>
+                        {# <span class="comment-date">{{ comment.createdAt|date('m/d/Y H:i:s') }}</span> #}
+                    </div>
+                    <div class="comment-body">
+                        <p>{{ comment.comment }}</p>
+                        <div class="comment-rating">
+                            {% for i in 1..5 %}
+                                {% if i <= comment.star %}
+                                    <i class="fas fa-star"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+
+         
+         
   <script>
   let qte = document.getElementById('qte');
 
