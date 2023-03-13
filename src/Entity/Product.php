@@ -31,8 +31,7 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Category $category = null;
 
-    #[ORM\ManyToMany(targetEntity: Command::class, mappedBy: 'product')]
-    private Collection $commands;
+    
 
     #[ORM\ManyToMany(targetEntity: Booking::class, mappedBy: 'product')]
     private Collection $no;
@@ -49,12 +48,7 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'product')]
     #[ORM\JoinColumn(nullable: false)]
 
-    public function __construct()
-    {
-        $this->commands = new ArrayCollection();
-        $this->no = new ArrayCollection();
-    }
-
+    
     public function getId(): ?int
     {
         return $this->id;

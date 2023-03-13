@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Product;
 use App\Form\Product1Type;
+use App\Form\CommentType;
+use App\Repository\CommentRepository;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,15 +71,48 @@ class ProductControllerCrudController extends AbstractController
     }
 
 
+#[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET', 'POST'])]
+public function show(Product $product, Request $request, ProductRepository $productRepository, CommentRepository $commentRepository, EntityManagerInterface $em): Response
+{
+    $user = $this->getUser();
 
+    $comment = new Comment();
+    $form = $this->createForm(CommentType::class, $comment);
+    $form->handleRequest($request);
 
-    #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET'])]
-    public function show(Product $product): Response
-    {
-        return $this->render('product_controller_crud/show2.html.twig', [
-            'product' => $product,
-        ]);
+    if ($form->isSubmitted() && $form->isValid()) {
+        $comment = $form->getData();
+        $comment->setUser($user);
+        $comment->setProduct($product);
+
+        try {
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash('success', 'Your comment has been added successfully!');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Failed to save comment: ' . $e->getMessage());
+        }
+
+        return $this->redirectToRoute('app_product_controller_crud_show', ['id' => $product->getId()]);
     }
+
+    $comments = $commentRepository->findBy(['product' => $product]);
+
+    return $this->render('product_controller_crud/show2.html.twig', [
+        'product' => $product,
+        'comments' => $comments,
+
+        'form' => $form->createView(),
+    ]);
+}
+
+
+    
+    
+
+
+
 
     #[Route('/{id}/edit', name: 'app_product_controller_crud_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
