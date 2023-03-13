@@ -53,6 +53,7 @@ class Command
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $status_stripe = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
