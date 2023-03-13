@@ -59,23 +59,26 @@ class BackOfficeUserController extends AbstractController
 
         
         // Get the total price of the booking
-$totalPrice = $booking->getPrice();
+$unitPrice = $booking->getPrice();
 
+$nbperson = $booking ->getNbPerson();
 
+$total = $unitPrice * $nbperson;
 // Calculate the TVA (VAT) amount at a rate of 20%
-$tva = $totalPrice * 0.2;
+$tva = $unitPrice * 0.2;
 
 
  
 
 // Calculate the total price including TVA (VAT)
-$priceWithoutTva = $totalPrice - $tva;
+$priceWithoutTva = $unitPrice - $tva;
 
         // Render the HTML template as a string
         $html = $this->renderView('back_office_user/invoice.html.twig', [
             'user' => $user,
             'booking' => $booking,
-            'totalPrice' => $totalPrice,
+            'nbperson' => $nbperson,
+            'total' => $total,
             'tva' => $tva,
             'priceWithoutTva' => $priceWithoutTva,
             'date' => new DateTime(),

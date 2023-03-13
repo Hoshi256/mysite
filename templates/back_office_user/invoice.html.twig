@@ -64,22 +64,28 @@
             <tr>
                 <th>Product</th>
                 <th>Price</th>
+                <th>Quantity</th>
+
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>{{ booking.product.name }}</td>
                 <td>{{ booking.product.price }} EUR</td>
+                <td>{{ booking.nbperson }}</td>
+
 
             </tr>
         </tbody>
     </table>
     <div class="total">
+
             <p>Price TTC {{priceWithoutTva}}</p>
               <p>TVA {{tva}}</p>
+              
+<p>TOTAL PRICE {{total}}</p>
 
-
-        <p>Total amount: {{ booking.product.price }} EUR</p>
+        {# <p>Total amount: {{ booking.product.price }} EUR</p> #}
 
 
 

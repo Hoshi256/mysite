@@ -55,19 +55,26 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/cart/add/{id}/quantity', name: 'cart_add')]
+    #[Route('/cart/add/{id}/{quantity}', name: 'cart_add')]
     
-    public function add($id, SessionInterface $session, Environment $twig) {
+    public function add($id, $quantity, SessionInterface $session, Environment $twig) {
         // $session = $request->getSession();
         $cart = $session ->get('cart', []);
 
         if(!empty($cart[$id])) {
-            $cart[$id]++;
+            $cart[$id]+= $quantity;
         } else {
-            $cart[$id] = 1;
+            $cart[$id] = $quantity;
         }
 
        
+// start quantity
+
+
+//end quantoty
+
+
+
 
         $session->set('cart', $cart);
 

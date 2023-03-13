@@ -30,7 +30,7 @@
                 <b>Disponibility date:</b> from {{ product.dateIn|date("d/m/y") }} to {{ product.dateOut|date("d/m/y") }}
             </div>
 
-            <form class="mt-4 p-4 bg-light" method="post">
+            {# <form class="mt-4 p-4 bg-light" method="post">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Quantity</span>
@@ -38,19 +38,44 @@
                     <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1">
                 </div>
 
+
                 <div class="add-to-cart">
-                    <a id="qte" href="{{ path('cart_add', {'id': product.id, 'quantity':3}) }}" class="btn btn-warning">Add to Cart</a>
+                    <a id="number" href="{{ path('cart_add', {'id': product.id, 'quantity': quantity}) }}" class="btn btn-warning">Add to Cart</a>
+
+
 
                     <a href="{{ path('app_product_controller_crud_index') }}" class="btn btn-primary">
     Back to list
 </a>
                 </div>
-            </form>
+            </form> #}
+
+
+<form class="mt-4 p-4 bg-light">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Quantity</span>
+        </div>
+        <input type="hidden" id="product-id" value="{{ product.id }}">
+        <input type="text" id="quantity" class="form-control" value="1" readonly>
+        <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary" onclick="decreaseQuantity()">-</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="increaseQuantity()">+</button>
+        </div>
+    </div>
+
+    <div class="add-to-cart">
+        <a id="add-to-cart" href="{{ path('cart_add', {'id': product.id, 'quantity': 1}) }}" class="btn btn-warning">Add to Cart</a>
+        <a href="{{ path('app_product_controller_crud_index') }}" class="btn btn-primary">Back to list</a>
+    </div>
+</form>
+            
         </div>
     </div>
 
 
 </div>
+
 
 
 <div class="col-lg-6 mx-auto">
@@ -95,13 +120,34 @@
 {% endif %}
 
 
+<script>
+    function decreaseQuantity() {
+        let quantityInput = document.getElementById('quantity');
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 1) {
+            quantity--;
+            quantityInput.value = quantity.toString();
+            updateCartLink(quantity);
+        }
+    }
 
+    function increaseQuantity() {
+        let quantityInput = document.getElementById('quantity');
+        let quantity = parseInt(quantityInput.value);
+        quantity++;
+        quantityInput.value = quantity.toString();
+        updateCartLink(quantity);
+    }
+
+    function updateCartLink(quantity) {
+        let cartLink = document.getElementById('add-to-cart');
+        let productId = document.getElementById('product-id').value;
+        cartLink.href = '{{ path('cart_add', {'id': product.id, 'quantity': '__QUANTITY__'}) }}'.replace('__QUANTITY__', quantity);
+    }
+</script>
          
          
-  <script>
-  let qte = document.getElementById('qte');
 
-  </script>
   <style>
     .img-thumbnail {
         max-width: 100%;
