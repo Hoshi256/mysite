@@ -18,7 +18,7 @@
         <th width="200"><strong>DateOut</strong></th>
         <th width="200"><strong>Price</strong></th>
         <th width="200"><strong>Nb Persons</strong></th>
-        <th width="200"><strong>Facture</strong></th>
+        <th width="200"><strong>Action</strong></th>
 
 
     </tr>
@@ -34,7 +34,14 @@
         <td>{{ booking.price }}</td>
         <td>{{ booking.nbPerson }}</td>
         <td>
- <a href="{{ path('app_generate_invoice') }}?booking={{ booking.id }}">Download PDF</a> </td>
+ <a href="{{ path('app_generate_invoice') }}?booking={{ booking.id }}">
+
+ <button type="button" class="btn btn-primary btn-sm">
+    <i class="bi bi-download"></i> Facture
+
+  </button>
+ 
+ </a> </td>
 </tr>
        
         {% endfor %}
