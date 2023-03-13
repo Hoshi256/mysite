@@ -88,6 +88,38 @@
 </div>
 
 
+{# {% if comments|length > 0 %}
+    <div class="container">
+        <hr>
+        <h2 class="text-center mb-4">Comments</h2>
+        <div class="row">
+            {% for comment in comments %}
+                <div class="col-md-3 mb-4">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ comment.user.FirstName }}</h5>
+                            <p class="card-text">{{ comment.comment }}</p>
+                            <div class="comment-rating">
+                                {% for i in 1..5 %}
+                                    {% if i <= comment.star %}
+                                        <i class="fas fa-star text-warning"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index % 4 == 0 %}
+                    </div><hr><div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %} #}
+
+
 {% if comments|length > 0 %}
     <div class="container">
         <hr>
@@ -115,6 +147,10 @@
                     </div><hr><div class="row">
                 {% endif %}
             {% endfor %}
+        </div>
+
+        <div class="pagination">
+            {{ knp_pagination_render(comments) }}
         </div>
     </div>
 {% endif %}
