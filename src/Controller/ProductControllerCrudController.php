@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Product;
-use App\Form\Product1Type;
 use App\Form\CommentType;
+use App\Form\Product1Type;
 use App\Repository\CommentRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,7 +65,7 @@ class ProductControllerCrudController extends AbstractController
             return $this->redirectToRoute('app_product_controller_crud_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('product_controller_crud/new.html.twig', [
+        return $this->render('product_controller_crud/new.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
@@ -72,7 +73,7 @@ class ProductControllerCrudController extends AbstractController
 
 
 #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET', 'POST'])]
-public function show(Product $product, Request $request, ProductRepository $productRepository, CommentRepository $commentRepository, EntityManagerInterface $em): Response
+public function show(Product $product, Request $request, ProductRepository $productRepository, CommentRepository $commentRepository, EntityManagerInterface $em, PaginatorInterface $paginator): Response
 {
     $user = $this->getUser();
 
@@ -97,11 +98,23 @@ public function show(Product $product, Request $request, ProductRepository $prod
         return $this->redirectToRoute('app_product_controller_crud_show', ['id' => $product->getId()]);
     }
 
-    $comments = $commentRepository->findBy(['product' => $product]);
+    $comment = $commentRepository->findBy(['product' => $product]);
+
+ $commentsQuery = $commentRepository->createQueryBuilder('c')
+        ->where('c.product = :product')
+        ->setParameter('product', $product)
+        ->getQuery();
+
+    $pagination = $paginator->paginate(
+        $commentsQuery,
+        $request->query->getInt('page', 1),
+        8 // limit per page
+    );
+    
 
     return $this->render('product_controller_crud/show2.html.twig', [
         'product' => $product,
-        'comments' => $comments,
+        'comments' => $pagination,
 
         'form' => $form->createView(),
     ]);
