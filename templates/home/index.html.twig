@@ -183,25 +183,31 @@ caption {
 
 <div class="container">
 
-    <a href="{{ path('app_product_controller_crud_index') }}">LOVINA</a>
-          <a href="#">KUTA</a>
-          <a href="#">UBUD</a>
-          <a href="#">SANUR</a>
-          <a href="#">GILI ISLAND</a>
-          <a href="#">LAST MINUTE</a>
+
+
+  <a href="{{ path('app_product_controller_crud_index') }}">LOVINA</a>
+  <a href="#">KUTA</a>
+  <a href="#">UBUD</a>
+  <a href="#">SANUR</a>
+  <a href="#">GILI ISLAND</a>
+  <a href="#">LAST MINUTE</a>
+
+
+
+<div class="search-container">
+ <form action="{{ path('app_search_results') }}" method="GET">
+        <input type="text" name="search-term" placeholder="Search for a product">
+        {# <input type="text" placeholder="2 adultes"> #}
+        <button type="submit">Search</button>
+        {# <input type="text" placeholder="1 semaine"> #}
+        {# <input type="text" placeholder="17/04/2023"> #}
+  
+    </form>  
+  
+ 
+</div>
 
 </div>
-     
-    <div class="search-container">
-          <form action="{{ path('app_search_results') }}" method="GET">
-                  <input type="text" name="search-term" placeholder="Search for a product">
-                  <input type="text" name="search-term" placeholder="Search for a price">
-                  <button type="submit">Search</button>       
-          </form>  
-      
-    
-    </div>
-
 
 
 
