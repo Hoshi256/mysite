@@ -187,11 +187,16 @@ caption {
 
 
 <div class="search-container">
-  <input type="text" placeholder="Padang-Padang">
-  <input type="text" placeholder="17/04/2023">
-  <input type="text" placeholder="1 semaine">
-  <input type="text" placeholder="2 adultes">
-  <button type="submit">Search</button>
+ <form action="{{ path('app_search_results') }}" method="GET">
+        <input type="text" name="search-term" placeholder="Search for a product">
+        {# <input type="text" placeholder="2 adultes"> #}
+        <button type="submit">Search</button>
+        {# <input type="text" placeholder="1 semaine"> #}
+        {# <input type="text" placeholder="17/04/2023"> #}
+  
+    </form>  
+  
+ 
 </div>
 
 </div>

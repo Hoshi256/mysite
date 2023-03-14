@@ -28,7 +28,7 @@ class ContactController extends AbstractController
                 $mail->Port = 587;
                 $mail->SMTPAuth   = true; 
                 $mail->Username   = 'ing.topaz@gmail.com';   
-                $mail->Password   = 'uuuiehtmaqnmzjpu';   
+                $mail->Password   = 'kztkaawsrdtveuyb';   
                   //SMTP username
                                   //Enable SMTP authentication
                 // $from = $request->request->get('from');

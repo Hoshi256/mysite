@@ -96,8 +96,8 @@ class SecurityController extends AbstractController
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 587;
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'daniela.puscoiu@gmail.com';                     //SMTP username
-        $mail->Password   = 'yupppwccfpbaigsn'; 
+        $mail->Username   = 'ing.topaz@gmail.com';                     //SMTP username
+        $mail->Password   = 'kztkaawsrdtveuyb'; 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;          // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged 
         
 
