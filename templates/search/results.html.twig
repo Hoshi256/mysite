@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block body %}
+    <p>Search Results for "{{ searchTerm }}"</p>
+
+    {% if results|length > 0 %}
+      <li>
+
+        <div class="row">
+            {% for product in results %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ asset('ulpoads/' ~ product.image) }}" alt="{{ product.name }} image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.price }} €</p>
+                            <a href="{{ path('app_product_controller_crud_show', {'id': product.id}) }}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index % 4 == 0 %}
+                    </div><div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+          </li>
+
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+{% endblock %}

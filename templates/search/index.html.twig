@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Search</h1>
+
+    <form action="{{ path('app_search_results') }}" method="get">
+        <div class="form-group">
+            <label for="search-term">Search:</label>
+            <input type="text" id="search-term" name="search-term" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if results is not empty %}
+        <h2>Results for "{{ searchTerm }}"</h2>
+        <ul>
+            {% for product in results %}
+                <li>{{ product.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
