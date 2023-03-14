@@ -40,10 +40,17 @@
         <td>{{ item.product.dateOut |date("d/m/y")  }}</td>
         <td>{{ item.quantity}}</td>
         <td>{{ item.product.price * item.quantity }}</td>
-        <td>
+        {# <td>
         <a href="{{ path('cart_remove', {'id': item.product.id})}}" class="btn btn-danger btn-sm"></a>
         <i class="fas fa-trash"></i>
-        </td>
+        </td> #}
+
+
+        <td>
+                        <a href="{{ path('cart_remove', {'id': item.product.id}) }}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
     </tr>
    {% endfor %}
    </tbody>
@@ -59,28 +66,19 @@
  
    </table>
 
-        <div class="continue">
-     <p><a class="btn btn-fill-out" href="{{ path('app_home')}}">Poursuivre vos achats</a></p>
+      <div class="continue">
+        <p><a class="btn btn-fill-out" href="{{ path('app_home') }}">Continue shopping</a></p>
+    </div>
 
-                       {% if app.user %}
-
-  <div class="paynow">
-
-   <a href="{{ path('app_stripe')}}" class="btn btn-succes btn-sm">Pay now</a>
-
-   </div>
-        
-        
-        
-        
-                           {% else %}
-
-     <div class="paynow">
-     <p><a class="btn btn-fill-out" href="{{ path('app_login')}}">Login ou register you</a></p>
-
-      </div>                    
-
-                              {% endif %}
+                {% if app.user %}
+        <div class="paynow">
+            <a href="{{ path('app_stripe') }}" class="btn btn-success btn-sm">Pay now</a>
+        </div>
+    {% else %}
+        <div class="paynow">
+            <p><a class="btn btn-fill-out" href="{{ path('app_login') }}">Login or register</a></p>
+        </div>
+    {% endif %}   
 
     
 {% else %}

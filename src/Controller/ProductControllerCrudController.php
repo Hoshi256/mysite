@@ -121,12 +121,6 @@ public function show(Product $product, Request $request, ProductRepository $prod
 }
 
 
-    
-    
-
-
-
-
     #[Route('/{id}/edit', name: 'app_product_controller_crud_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
     {   
@@ -158,4 +152,8 @@ public function show(Product $product, Request $request, ProductRepository $prod
 
         return $this->redirectToRoute('app_product_controller_crud_index', [], Response::HTTP_SEE_OTHER);
     }
+
+       
+
+
 }
