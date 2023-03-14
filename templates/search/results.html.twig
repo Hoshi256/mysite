@@ -2,32 +2,53 @@
 
 {% block title %}Search Results{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    
+{% endblock %}
+
 {% block body %}
-    <p>Search Results for "{{ searchTerm }}"</p>
+    <div class="container">
+        <h1 class="text-center">Search Results for "{{ searchTerm }}"</h1>
 
-    {% if results|length > 0 %}
-      <li>
-
-        <div class="row">
+        <div class="row mx-auto">
             {% for product in results %}
-                <div class="col-md-3">
+                <div class="col-md-3 mb-4">
                     <div class="card">
                         <img class="card-img-top" src="{{ asset('ulpoads/' ~ product.image) }}" alt="{{ product.name }} image">
                         <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <p class="card-text">{{ product.price }} €</p>
-                            <a href="{{ path('app_product_controller_crud_show', {'id': product.id}) }}" class="btn btn-primary">View Details</a>
+                            <h5 class="card-title">{{ product.name }} {{product.price}} €</h5>
+                            <p class="card-text">{{ product.description | slice(0, 100)}}</p>
+                           
+                           {# <a href="{{ path('app_product_controller_crud_show', {'id': product.id}) }}" class="btn btn-primary" onclick="this.style.backgroundColor='#ff0000';">View Product</a> #}
+ <a href="{{ path('app_product_controller_crud_show', {'id': product.id}) }}" class="btn btn-primary">View Product</a>
                         </div>
                     </div>
                 </div>
-                {% if loop.index % 4 == 0 %}
-                    </div><div class="row">
+
+                {% if loop.index is divisible by(4) %}
+                    </div><div class="row mx-auto">
                 {% endif %}
             {% endfor %}
         </div>
-          </li>
+    </div>
 
-    {% else %}
-        <p>No results found.</p>
-    {% endif %}
+
+<style>
+.card-img-top {
+    transition: transform 0.5s ease;
+}
+
+.card-img-top:hover {
+    transform: scale(1.2);
+}
+</style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
