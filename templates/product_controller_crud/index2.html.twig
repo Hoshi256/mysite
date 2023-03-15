@@ -50,7 +50,7 @@
                     <img class="card-img-top" src="{{ app.request.getBaseURL() }}/ulpoads/{{ product.image }}" alt="{{ product.name }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description }}</p>
+<p class="card-text">{{ product.description | slice(0, 150) ~ "..." }}</p>
                         <div class="d-flex justify-content-between align-item-center">
     <a href="{{ path('app_product_controller_crud_show', {'id': product.id}) }}" class="btn btn-dark">View details</a>
     <span class="h5 mt-auto"><span class="price">{{ product.price }}</span> €</span>
@@ -64,4 +64,7 @@
     </div>
 </div>
 
+<script>
+
+</script>
 {% endblock %}
