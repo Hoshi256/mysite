@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://www.bing.com/api/maps/mapcontrol?key={{ apiKey }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="map" style="position:relative;width:600px;height:400px;"></div>
+
+    <script type="text/javascript">
+        var map = new Microsoft.Maps.Map('#map', {
+            center: new Microsoft.Maps.Location({{ mapOptions.center.latitude }}, {{ mapOptions.center.longitude }}),
+            zoom: {{ mapOptions.zoom }}
+        });
+        var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
+        map.entities.push(pushpin);
+    </script>
+{% endblock %}
