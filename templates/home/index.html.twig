@@ -5,8 +5,6 @@
     {{ encore_entry_link_tags('app') }}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
    
-
-
 <style>
 
 .container {
@@ -28,43 +26,11 @@
     margin: 5px;
   }
 
-
-{# .carousel-control-prev {
-  margin-left: 0px;
-  z-index: 1;
-  left: 0;
-} #}
-
-
-{# .carousel-control-next {
-  margin-right: 0px;
-  z-index: 1;
-  right: 0;
-} #}
-
-
-{# .carousel-control-prev-icon {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-} #}
-{# 
-.carousel-control-next-icon {
-  position: absolute;
-  top: 50%;
-  left: -15;
-  transform: translateY(-50%);
-} #}
-
-
-
 .search-container {
   background-color:white;
   margin-top:20px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content:  center;
   align-items: center;
   margin-bottom: 20px;
 }
@@ -76,6 +42,13 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.search-container form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the form elements horizontally */
+  align-items: center;
 }
 
 .search-container button {
@@ -136,7 +109,46 @@ caption {
   .price td {
     width: 50%;
   }
+	/* Carousel animation */
+		.carousel-item {
+		  transition: transform 0.5s ease-in-out;
+		}
 
+		.carousel-item-next,
+		.carousel-item-prev,
+		.carousel-item.active {
+		  transform: translateX(0);
+		}
+
+		.carousel-item-next.carousel-item-left,
+		.carousel-item-prev.carousel-item-right,
+		.carousel-item.active.carousel-item-left {
+		  transform: translateX(-100%);
+		}
+
+		.carousel-item-next.carousel-item-right,
+		.carousel-item-prev.carousel-item-left,
+		.carousel-item.active.carousel-item-right {
+		  transform: translateX(100%);
+		}
+
+		/* Fade-in/fade-out animation */
+		.carousel-fade .carousel-item {
+		  opacity: 0;
+		  transition-duration: .6s;
+		  transition-property: opacity;
+		}
+
+		.carousel-fade .carousel-item.active,
+		.carousel-fade .carousel-item-next.carousel-item-left,
+		.carousel-fade .carousel-item-prev.carousel-item-right {
+		  opacity: 1;
+		}
+
+		.carousel-fade .active.carousel-item-left,
+		.carousel-fade .active.carousel-item-right {
+		  opacity: 0;
+		}
 
   /* Media queries */
   @media (max-width: 991px) {
@@ -169,10 +181,6 @@ caption {
 
 
 
-
-      {# city #}
-
-
 <div class="container">
 
 
@@ -187,95 +195,83 @@ caption {
 
 
 <div class="search-container">
-  <input type="text" placeholder="Padang-Padang">
-  <input type="text" placeholder="17/04/2023">
-  <input type="text" placeholder="1 semaine">
-  <input type="text" placeholder="2 adultes">
-  <button type="submit">Search</button>
+ <form action="{{ path('app_search_results') }}" method="GET">
+        <input type="text" name="search-term" placeholder="Search for a product">
+        {# <input type="text" placeholder="2 adultes"> #}
+        <button type="submit">Search</button>
+        {# <input type="text" placeholder="1 semaine"> #}
+        {# <input type="text" placeholder="17/04/2023"> #}
+  
+    </form>  
+  
+ 
 </div>
 
 </div>
+
 
 
 <div class="row mx-4 mt-4 mb-4">
-  <div class="col-md-8">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <!-- ... carousel HTML goes here ... -->
+	  <div class="col-md-8">
+	    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+	      <ol class="carousel-indicators">
+	        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+	        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+	        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+	        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+	      </ol>
 
-      <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-  </ol>
-
-
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="{{ asset('images/960x0.jpg') }}" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="{{ asset('images/960x0.jpg') }}"  alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="{{ asset('images/960x0.jpg') }}"  alt="Third slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="{{ asset('images/960x0.jpg') }}"  alt="Fourth slide">
-    </div>
-  </div>
-    </div>
-  </div>
+	      <div class="carousel-inner">
+	        <div class="carousel-item active">
+	          <img class="d-block w-100" src="{{ asset('images/960x0.jpg') }}" alt="First slide">
+	        </div>
+	        <div class="carousel-item">
+	          <img class="d-block w-100" src="{{ asset('images/960x0.jpg') }}" alt="Second slide">
+	        </div>
+	        <div class="carousel-item">
+	          <img class="d-block w-100" src="{{ asset('images/960x0.jpg') }}" alt="Third slide">
+	        </div>
+	        <div class="carousel-item">
+	          <img class="d-block w-100" src="{{ asset('images/960x0.jpg') }}" alt="Fourth slide">
+	        </div>
+	      </div>
+	    </div>
+	  </div>
   <div class="col-md-4">
-    <table class="table">
-      <thead>
-        <tr>
-          
-          <th>OUR DESTINATIONS</th>
-          <th>PRICE</th>
-         
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-        
-          <td>John</td>
-          <td>Doe</td>
-         
-        </tr>
-        <tr>
-        
-          <td>Jane</td>
-          <td>Doe</td>
-          
-        </tr>
-        <tr>
-       
-          <td>Bob</td>
-         
-          
-        </tr>
-      </tbody>
-    </table>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Our Destinations</h5>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <tbody>
+
+
+
+
+                        {% for product in product |slice(0, 20) %}
+
+            <tr>
+    <td style="font-weight: bold; color: black;"><a href="{{ path('app_product_controller_crud_show', {'id': product.id}) }}">{{product.name}}</a></td>
+    <td style="color: red;">{{product.price}}€</td>
+</tr>
+            
+           
+                        {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-
 
 
 </html>
 
-
-
-
 <script>
   $('.carousel').carousel({
-    interval: 3000 // Change image every 3 seconds
+    interval: 3500 // Change image every 3 seconds
   })
 </script>
 
