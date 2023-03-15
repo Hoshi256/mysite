@@ -14,8 +14,9 @@ class BingController extends AbstractController
         $apiKey = 'AhmZHpArEeL_jrnzVqg3Edv4qDGlqZeoIJ-I7yM8u1Ym3fBA54gAxc0_PCg3UmGc';
         $mapOptions = [
             'center' => [
-                'latitude' => 47.6062,
-                'longitude' => -122.3321,
+                'latitude' => 43.561779,
+                'longitude' => 3.797811
+,
             ],
             'zoom' => 10,
         ];

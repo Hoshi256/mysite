@@ -6,14 +6,21 @@
 {% endblock %}
 
 {% block body %}
-    <div id="map" style="position:relative;width:600px;height:400px;"></div>
+    <div id="map" style="position:relative;width:100%;height:600px;"></div>
 
     <script type="text/javascript">
         var map = new Microsoft.Maps.Map('#map', {
             center: new Microsoft.Maps.Location({{ mapOptions.center.latitude }}, {{ mapOptions.center.longitude }}),
             zoom: {{ mapOptions.zoom }}
         });
-        var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
-        map.entities.push(pushpin);
+
+        // Define the pushpin image and location
+        var pinImage = new Microsoft.Maps.Pushpin(map.getCenter(), {
+            icon: '/images/cart.png',
+            anchor: new Microsoft.Maps.Point(25, 50)
+        });
+
+        // Add the pushpin to the map
+        map.entities.push(pinImage);
     </script>
 {% endblock %}
