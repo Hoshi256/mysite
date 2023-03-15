@@ -152,8 +152,6 @@ class SecurityController extends AbstractController
 
                     $this->addFlash('success', 'Password successfully changed');
                     return $this->redirectToRoute('app_login');
-
-
                 }
 
                  return $this->render('security/reset_password.html.twig', [
