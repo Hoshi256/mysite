@@ -1,0 +1,18 @@
+{# extend the base layout #}
+{% extends 'base.html.twig' %}
+
+{# define the title of the page #}
+{% block title %}
+    Cookie Example
+{% endblock %}
+
+{# define the content of the page #}
+{% block body %}
+    <h1>Cookie Example</h1>
+    {# check if cookie value exists #}
+    {% if cookieValue is defined %}
+        <p>The value of myCookie is {{ cookieValue }}</p>
+    {% else %}
+        <p>There is no cookie called myCookie</p>
+    {% endif %}
+{% endblock %}
