@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="3dzEpuT" resname="Votre commentaire à été ajouté avec succes">
+        <source>Votre commentaire à été ajouté avec succes</source>
+        <target>__Votre commentaire à été ajouté avec succes</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="NV958p1" resname="Comments">
+        <source>Comments</source>
+        <target>Commentaires</target>
+      </trans-unit>
+      <trans-unit id="v2OmxX6" resname="LAST MINUTE">
+        <source>LAST MINUTE</source>
+        <target>Derniere minute</target>
+      </trans-unit>
+      <trans-unit id="JHfFTiS" resname="CONTACT US">
+        <source>CONTACT US</source>
+        <target>Contactez-nous</target>
+      </trans-unit>
+      <trans-unit id="LXW3ay3" resname="ACCOUNT">
+        <source>ACCOUNT</source>
+        <target>COMPTE</target>
+      </trans-unit>
+      <trans-unit id="nWMiwfT" resname="Login">
+        <source>Login</source>
+        <target>Connectez-vous</target>
+      </trans-unit>
+      <trans-unit id="u3I07BJ" resname="Register">
+        <source>Register</source>
+        <target>Enregistrez-vous</target>
+      </trans-unit>
+      <trans-unit id="Q.qUZaj" resname="My commands">
+        <source>My commands</source>
+        <target>Mes commandes</target>
+      </trans-unit>
+      <trans-unit id="GF_NsyJ" resname="Hello">
+        <source>Hello</source>
+        <target>Bonjour</target>
+      </trans-unit>
+      <trans-unit id="0FJ_Sz1" resname="Logout">
+        <source>Logout</source>
+        <target>Deconnexion</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

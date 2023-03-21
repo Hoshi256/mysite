@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/product/controller/crud')]
 class ProductControllerCrudController extends AbstractController
@@ -73,7 +74,7 @@ class ProductControllerCrudController extends AbstractController
 
 
 #[Route('/{id}', name: 'app_product_controller_crud_show', methods: ['GET', 'POST'])]
-public function show(Product $product, Request $request, ProductRepository $productRepository, CommentRepository $commentRepository, EntityManagerInterface $em, PaginatorInterface $paginator): Response
+public function show(Product $product, Request $request, CommentRepository $commentRepository, EntityManagerInterface $em, PaginatorInterface $paginator, TranslatorInterface $translator): Response
 {
     $user = $this->getUser();
 
@@ -90,6 +91,7 @@ public function show(Product $product, Request $request, ProductRepository $prod
             $em->persist($comment);
             $em->flush();
 
+            // $message = $translator->trans('Votre commentaire à été ajouté avec succes');
             $this->addFlash('success', 'Your comment has been added successfully!');
         } catch (\Exception $e) {
             $this->addFlash('error', 'Failed to save comment: ' . $e->getMessage());

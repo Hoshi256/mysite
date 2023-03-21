@@ -46,36 +46,53 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('app_home') }}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('app_home') }}">{% trans %}Home{% endtrans %}<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">LAST MINUTE</a>
+                    <a class="nav-link" href="#">{% trans %}LAST MINUTE{% endtrans %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_contact') }}">CONTACT US</a>
+                    <a class="nav-link" href="{{ path('app_contact') }}">{% trans %}CONTACT US{% endtrans %}</a>
                 </li>
-               
+
+                 
+                    {% for locale in locales %} 
+
+                     {% if locale != app.request.locale %}
+                    
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ path('change-locale', {'locale' : locale} )}}"><img src="{{ app.request.getBaseURL() }}/ulpoads/{{locale}}.png" alt="{{locale}}"></a>
+                </li>
+               {% endif %}
+               {% endfor %}
+
+
+
+
+
+
                 {# {{ dump(app.session) }}; #}
             {{app.session.get('cartCount')}}
 
 
-                <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ACCOUNT
+          {% trans %}ACCOUNT{% endtrans %}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
 
         
-          <a class="dropdown-item" href="{{ path('app_login') }}">Login</a>
-          <a class="dropdown-item" href="{{ path('app_register') }}">Register</a>
+          <a class="dropdown-item" href="{{ path('app_login') }}">{% trans %}Login{% endtrans %}</a>
+          <a class="dropdown-item" href="{{ path('app_register') }}">{% trans %}Register{% endtrans %}</a>
           {% if app.user %}
-          <a class="dropdown-item" href="{{ path('app_back_office_user') }}">My commands</a>
+          <a class="dropdown-item" href="{{ path('app_back_office_user') }}">{% trans %}My commands{% endtrans %}</a>
           {% endif %}          
 
          
       </li>
 
+  
 
                  <li class="nav-item">
               
@@ -91,7 +108,7 @@
                 </li>
                 {% if app.user %}
         <li class="nav-item">
-          <p class="nav-link">Hello, {{ app.user.FirstName }}</p>
+          <p class="nav-link">{% trans %}Hello{% endtrans %}, {{ app.user.FirstName }}</p>
         </li>
         <li class="nav-item">
           <img src="./my-avatar2.jpg" alt="">
@@ -101,10 +118,12 @@
       <li class="nav-item">
   <form action="{{ path('app_logout') }}" method="post">
     <button type="submit" class="btn btn-danger">
-      Logout
+      {% trans %}Logout{% endtrans %}
     </button>
   </form>
 </li>
+
+
 
         {% elseif app.request.attributes.get('_route') != 'app_login' and app.request.attributes.get('_route') != 'app_register' %}
         {# <li class="nav-item">
@@ -116,10 +135,17 @@
         {% endif %}
 
 
-            </ul>
-        </div>
-    </nav>
+         
 
+          
+
+
+            
+        </div>
+
+        
+    </nav>
+{# {{ dump(locales)}} #}
     <style>
 
       .navbar {

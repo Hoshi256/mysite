@@ -7,7 +7,6 @@ use App\Entity\User;
 use App\Entity\Booking;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
-
 use App\Repository\BookingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
