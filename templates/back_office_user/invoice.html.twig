@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% trans %}Document{% endtrans %}</title>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Invoice</title>
+    <title>{% trans %}Invoice{% endtrans %}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,21 +40,21 @@
     </style>
 </head>
 <body>
-    <h1>Invoice</h1>
+    <h1>{% trans %}Invoice{% endtrans %}</h1>
     <div class="info">
         <table>
             <tr>
-                <td>From:</td>
-                <td>my site </td>
+                <td>{% trans %}From:{% endtrans %}</td>
+                <td>{% trans %}my site{% endtrans %} </td>
             </tr>
             <tr>
-                <td>To:</td>
+                <td>{% trans %}To{% endtrans %}:</td>
                 <td>{{ user.FirstName }}{{user.LastName}}</td>
                 <td>{{ user.email }}</td>
 
             </tr>
             <tr>
-                <td>Date: {{ date|date('Y-m-d') }} </td>
+                <td>{% trans %}Date:{% endtrans %} {{ date|date('Y-m-d') }} </td>
                 {# <td>{{ booking.createdAt|date('d/m/Y') }}</td> #}
             </tr>
         </table>
@@ -62,9 +62,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
+                <th>{% trans %}Product{% endtrans %}</th>
+                <th>{% trans %}Price{% endtrans %}</th>
+                <th>{% trans %}Quantity{% endtrans %}</th>
 
             </tr>
         </thead>
@@ -80,10 +80,10 @@
     </table>
     <div class="total">
 
-            <p>Price TTC {{priceWithoutTva}}</p>
-              <p>TVA {{tva}}</p>
+            <p>{% trans %}Price TTC{% endtrans %} {{priceWithoutTva}}</p>
+              <p>{% trans %}TVA {% endtrans %}{{tva}}</p>
               
-<p>TOTAL PRICE {{total}}</p>
+<p>{% trans %}TOTAL PRICE {% endtrans %}{{total}}</p>
 
         {# <p>Total amount: {{ booking.product.price }} EUR</p> #}
 

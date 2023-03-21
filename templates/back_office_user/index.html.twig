@@ -9,16 +9,16 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>My list commands</h1>
+    <h1>{% trans %}My list commands{% endtrans %}</h1>
     <table class="table">
      <thead>
     <tr>            
-        <th width="200"><strong>Product</strong></th>
-        <th width="200"><strong>DateIn</strong></th>
-        <th width="200"><strong>DateOut</strong></th>
-        <th width="200"><strong>Price</strong></th>
-        <th width="200"><strong>Nb Persons</strong></th>
-        <th width="200"><strong>Action</strong></th>
+        <th width="200"><strong>{% trans %}Product{% endtrans %}</strong></th>
+        <th width="200"><strong>{% trans %}DateIn{% endtrans %}</strong></th>
+        <th width="200"><strong>{% trans %}DateOut{% endtrans %}</strong></th>
+        <th width="200"><strong>{% trans %}Price{% endtrans %}</strong></th>
+        <th width="200"><strong>{% trans %}Nb Persons{% endtrans %}</strong></th>
+        <th width="200"><strong>{% trans %}Action{% endtrans %}</strong></th>
 
 
     </tr>
@@ -37,7 +37,7 @@
  <a href="{{ path('app_generate_invoice') }}?booking={{ booking.id }}">
 
  <button type="button" class="btn btn-primary btn-sm">
-    <i class="bi bi-download"></i> Facture
+    <i class="bi bi-download"></i>{% trans %} Facture{% endtrans %}
 
   </button>
  

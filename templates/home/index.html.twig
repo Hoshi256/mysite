@@ -196,9 +196,9 @@ caption {
 
 <div class="search-container">
  <form action="{{ path('app_search_results') }}" method="GET">
-        <input type="text" name="search-term" placeholder="Search for a product">
+        <input type="text" name="search-term" placeholder={% trans %}"Search for a product"{% endtrans %}>
         {# <input type="text" placeholder="2 adultes"> #}
-        <button type="submit">Search</button>
+        <button type="submit">{% trans %}Search{% endtrans %}</button>
         {# <input type="text" placeholder="1 semaine"> #}
         {# <input type="text" placeholder="17/04/2023"> #}
   
@@ -240,7 +240,7 @@ caption {
   <div class="col-md-4">
     <div class="card">
       <div class="card-header">
-        <h5 class="card-title mb-0">Our Destinations</h5>
+        <h5 class="card-title mb-0">{% trans %}Our Destinations{% endtrans %}</h5>
       </div>
       <div class="card-body">
         <table class="table">

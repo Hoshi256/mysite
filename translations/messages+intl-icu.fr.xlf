@@ -6,7 +6,7 @@
     </header>
     <body>
       <trans-unit id="3dzEpuT" resname="Votre commentaire à été ajouté avec succes">
-        <source>You comment has add</source>
+        <source>Votre commentaire à été ajouté avec succes</source>
         <target>Votre commentaire à été ajouté avec succes</target>
       </trans-unit>
       <trans-unit id="OnhpU4i" resname="Home">
@@ -48,6 +48,98 @@
       <trans-unit id="0FJ_Sz1" resname="Logout">
         <source>Logout</source>
         <target>Deconnexion</target>
+      </trans-unit>
+      <trans-unit id="TtyL_vx" resname="Products">
+        <source>Products</source>
+        <target>Produits</target>
+      </trans-unit>
+      <trans-unit id="0b8EW7U" resname="View details">
+        <source>View details</source>
+        <target>Voir details </target>
+      </trans-unit>
+      <trans-unit id="2V8mUdf" resname="Our Destinations">
+        <source>Our Destinations</source>
+        <target>Nos Coups de coeur</target>
+      </trans-unit>
+      <trans-unit id="sSLIgfb" resname="&quot;Search for a product&quot;">
+        <source>"Search for a product"</source>
+        <target>"Cherchez un voyage"</target>
+      </trans-unit>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>Rechercher</target>
+      </trans-unit>
+      <trans-unit id="3Vv8cwB" resname="My list commands">
+        <source>My list commands</source>
+        <target>Mes commandes</target>
+      </trans-unit>
+      <trans-unit id="_574lBd" resname="Product">
+        <source>Product</source>
+        <target>Produit</target>
+      </trans-unit>
+      <trans-unit id="xfLRFdQ" resname="DateIn">
+        <source>DateIn</source>
+        <target>Date entrée</target>
+      </trans-unit>
+      <trans-unit id="8dOLVB1" resname="DateOut">
+        <source>DateOut</source>
+        <target>Date sortie</target>
+      </trans-unit>
+      <trans-unit id="k8kchR5" resname="Price">
+        <source>Price</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="w6V6XNw" resname="Nb Persons">
+        <source>Nb Persons</source>
+        <target>__Nb Persons</target>
+      </trans-unit>
+      <trans-unit id="ZM.xMZ0" resname="Action">
+        <source>Action</source>
+        <target>__Action</target>
+      </trans-unit>
+      <trans-unit id="e6lvCKC" resname="Facture">
+        <source>Facture</source>
+        <target>__Facture</target>
+      </trans-unit>
+      <trans-unit id="1r2MCu7" resname="Document">
+        <source>Document</source>
+        <target>__Document</target>
+      </trans-unit>
+      <trans-unit id="uDIALaK" resname="Invoice">
+        <source>Invoice</source>
+        <target>__Invoice</target>
+      </trans-unit>
+      <trans-unit id="3EXTbzX" resname="From:">
+        <source>From:</source>
+        <target>__From:</target>
+      </trans-unit>
+      <trans-unit id="UKYAj2p" resname="my site">
+        <source>my site</source>
+        <target>__my site</target>
+      </trans-unit>
+      <trans-unit id="9LBu9tP" resname="To">
+        <source>To</source>
+        <target>__To</target>
+      </trans-unit>
+      <trans-unit id="tRSJvej" resname="Date:">
+        <source>Date:</source>
+        <target>__Date:</target>
+      </trans-unit>
+      <trans-unit id="giurjUG" resname="Quantity">
+        <source>Quantity</source>
+        <target>__Quantity</target>
+      </trans-unit>
+      <trans-unit id="IDWPlJE" resname="Price TTC">
+        <source>Price TTC</source>
+        <target>__Price TTC</target>
+      </trans-unit>
+      <trans-unit id="rl9SopG" resname="TVA">
+        <source>TVA</source>
+        <target>__TVA</target>
+      </trans-unit>
+      <trans-unit id="9DJBJMa" resname="TOTAL PRICE">
+        <source>TOTAL PRICE</source>
+        <target>__TOTAL PRICE</target>
       </trans-unit>
     </body>
   </file>

@@ -10,7 +10,7 @@
                 <div class="login_wrap">
                     <div class="padding_eight_all bg-white">
                         <div class="heading_s1">
-                            <h3>Register</h3>
+                            <h3>{% trans %}Register{% endtrans %}</h3>
                         </div>
                         <div class="message-flash">
                             {% for flashError in app.flashes('verify_email_error') %}
@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-fill-out btn-block" name="register">Valide</button>
                             </div>
-                            <div class="form-note text-center">You have already an account??<a href="{{ path('app_login')}}">Connect now</a></div>
+                            <div class="form-note text-center">{% trans %}You have already an account??{% endtrans %}<a href="{{ path('app_login')}}">Connect now</a></div>
 
                             <input type="hidden" id="form_captcha" name="form[captcha]" /><script>
     var recaptchaCallback_form_captcha = function() {
