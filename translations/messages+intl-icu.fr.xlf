@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
       <trans-unit id="3dzEpuT" resname="Votre commentaire à été ajouté avec succes">
-        <source>Votre commentaire à été ajouté avec succes</source>
-        <target>__Votre commentaire à été ajouté avec succes</target>
+        <source>You comment has add</source>
+        <target>Votre commentaire à été ajouté avec succes</target>
       </trans-unit>
       <trans-unit id="OnhpU4i" resname="Home">
         <source>Home</source>

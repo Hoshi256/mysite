@@ -61,7 +61,7 @@
                      {% if locale != app.request.locale %}
                     
                     <li class="nav-item">
-                    <a class="nav-link" href="{{ path('change-locale', {'locale' : locale} )}}"><img src="{{ app.request.getBaseURL() }}/ulpoads/{{locale}}.png" alt="{{locale}}"></a>
+                    <a class="nav-link" href="{{ path('change-gitlocale', {'locale' : locale} )}}"><img src="{{ app.request.getBaseURL() }}/ulpoads/{{locale}}.png" alt="{{locale}}"></a>
                 </li>
                {% endif %}
                {% endfor %}
