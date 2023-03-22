@@ -141,6 +141,26 @@
         <source>TOTAL PRICE</source>
         <target>__TOTAL PRICE</target>
       </trans-unit>
+      <trans-unit id="CE2NWtP" resname="You have already an account??">
+        <source>You have already an account??</source>
+        <target>__You have already an account??</target>
+      </trans-unit>
+      <trans-unit id="YdaVBBA" resname="Connexion">
+        <source>Connexion</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="dDUw20Q" resname="Please sign in">
+        <source>Please sign in</source>
+        <target>Connectez-vous</target>
+      </trans-unit>
+      <trans-unit id="JLff1s." resname="Email :">
+        <source>Email :</source>
+        <target>Mail :</target>
+      </trans-unit>
+      <trans-unit id="piivmAm" resname="Créer un compte">
+        <source>Créer un compte</source>
+        <target>Créer un compte</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -5,7 +5,7 @@
 <section id="login" class="container py-5">
     <div class="row py-5 justify-content-center">
         <div class="col-12">
-            <h2 class="text-center pt-5">Connexion</h2>
+            <h2 class="text-center pt-5">{% trans %}Connexion{% endtrans %}</h2>
 
             <form class="d-flex flex-column m-auto py-3" action="{{path('app_login')}}" method="post" id="form">
                 {# <----- Flash alert -----> #}
@@ -26,9 +26,9 @@
               
 
                      {% endif %}
-<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+<h1 class="h3 mb-3 font-weight-normal">{% trans %}Please sign in{% endtrans %}</h1>
 <div class="email">
-    <label class="pb-2" for="inputEmail">Email :</label>
+    <label class="pb-2" for="inputEmail">{% trans %}Email :{% endtrans %}</label>
     <input class="form-control py-2 mb-3" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
 </div>
 <div class="input-group mb-3">
@@ -54,7 +54,7 @@
 
     <div class="col-12 pb-5 text-center">
         <p>ou</p>
-        <button class="btn btn-outline-dark w-25" href="{{path('app_register') }}">Créer un compte</button>
+        <button class="btn btn-outline-dark w-25" href="{{path('app_register') }}">{% trans %}Créer un compte{% endtrans %}</button>
         {# <p>
         <a href="{{path('github_connect')}}">Se connecter avec github</a>
         </p> #}
